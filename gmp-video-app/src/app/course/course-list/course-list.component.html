@@ -1,5 +1,6 @@
 <p>course-list works!</p>
 
-<gmp-course-list-item></gmp-course-list-item>
-<gmp-course-list-item></gmp-course-list-item>
-<gmp-course-list-item></gmp-course-list-item>
+<gmp-course-list-item *ngFor="let course of courses" [course]="course"></gmp-course-list-item>
+
+<button>See more</button>
+

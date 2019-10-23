@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Course } from 'src/app/core/course-model';
 
 @Component({
   selector: 'gmp-course-list-item',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-list-item.component.scss']
 })
 export class CourseListItemComponent implements OnInit {
-
+  @Input() course: Course;
+  
   constructor() { }
 
   ngOnInit() {
