@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CourseListItemComponent } from './course-list-item/course-list-item.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CoursePageComponent } from './course-page/course-page.component';
+import { FormsModule } from '@angular/forms'
 import { SectionComponent } from './section/section.component';
 
 
@@ -17,6 +18,7 @@ import { SectionComponent } from './section/section.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MatCardModule,
   ],
   exports: [

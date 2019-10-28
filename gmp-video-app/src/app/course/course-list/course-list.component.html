@@ -1,6 +1,3 @@
-<p>course-list works!</p>
-
-<gmp-course-list-item *ngFor="let course of courses" [course]="course"></gmp-course-list-item>
-
-<button>See more</button>
-
+<gmp-course-list-item *ngFor="let course of courses" [course]="course" (remove)="remove($event)">
+</gmp-course-list-item>
+<div (click)="loadMore()"><span>LOAD MORE</span></div>

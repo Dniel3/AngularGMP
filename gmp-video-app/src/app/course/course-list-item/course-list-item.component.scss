@@ -1,0 +1,101 @@
+$slate-gray: #525462;
+$cloudy-blue: #b9bdce;
+
+.container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+  display: flex;
+  margin: 0 85px 24px;
+  padding: 24px;
+
+  .actions {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 0 44px;
+    width: 8%;
+
+    button {
+      background-color: #30b6dd;
+      border: none;
+
+      i {
+        color: #ffffff;
+        height: 13.5px;
+        width: 13.5px;
+      }
+
+      span {
+        color: #ffffff;
+        font-family: SourceSansPro;
+        font-size: 12px;
+        font-weight: 600;
+        height: 22px;
+        letter-spacing: -0.09px;
+        line-height: 1.83;
+        width: 21px;
+      }
+    }
+  }
+
+  .course-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 44px 0 0;
+    width: 93%;
+
+    .course {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+
+      .time-container {
+        align-items: center;
+        display: flex;
+        justify-content: space-evenly;
+        width: 10%;
+
+        div {
+          align-items: center;
+          display: flex;
+        }
+
+        i {
+          color: $cloudy-blue;
+          font-family: FontAwesome;
+          font-size: 16px;
+          height: 16px;
+          width: 14px;
+        }
+
+        span {
+          color: $cloudy-blue;
+          font-family: SourceSansPro;
+          font-size: 12px;
+          height: 15px;
+        }
+      }
+
+      .title {
+        font-family: SourceSansPro;
+        font-size: 24px;
+        font-weight: 600;
+        height: 30px;
+        line-height: 1.25;
+        width: 263px;
+      }
+
+      div {
+        p {
+          color: $slate-gray;
+          font-family: SourceSansPro;
+          font-size: 14px;
+          height: 77px;
+          line-height: 1.71;
+        }
+      }
+    }
+  }
+
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../course-model';
+import { User } from '../user-model';
 
 @Component({
   selector: 'gmp-header',
@@ -13,10 +13,9 @@ export class HeaderComponent implements OnInit {
     name: 'cosme',
     lastName: 'fulanito'
   };
-  
+
   constructor() { }
 
   ngOnInit() {
   }
-
 }

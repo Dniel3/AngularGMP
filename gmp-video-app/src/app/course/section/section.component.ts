@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./section.component.scss']
 })
 export class SectionComponent implements OnInit {
+  course = '';
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  search() {
+    console.log(this.course);
+  }
 }

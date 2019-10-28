@@ -11,5 +11,4 @@ export class CoursePageComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

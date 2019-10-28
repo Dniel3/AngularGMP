@@ -10,11 +10,18 @@ import { Course } from 'src/app/core/course-model';
 export class CourseListComponent implements OnInit {
   courses: Course[] = [];
   
-  constructor(courseService: CourseService) {
-    this.courses = courseService.get();
+  constructor(private courseService: CourseService) {
    }
 
   ngOnInit() {
+    this.courses = this.courseService.get();
   }
 
+  remove(id: string) {
+    console.log('Parent delete:', id);
+  }
+
+  loadMore() {
+    console.log('Load more');
+  }
 }

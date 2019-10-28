@@ -1,0 +1,45 @@
+$white: #ffffff;
+
+.container {
+  align-items: center;
+  color: $white;
+  display: flex;
+  font-family: SourceSansPro;
+  font-size: 14px;
+  justify-content: space-between;
+  margin: 0 39px 0 85px;
+
+  .user-login-container {
+    align-items: center;
+    display: flex;
+    height: 18px;
+    justify-content: space-between;
+
+    .ic_exit {
+      width: 16px;
+      height: 12px;
+      object-fit: contain;
+    }
+
+    .ic_user {
+      width: 10px;
+      height: 12px;
+      object-fit: contain;
+    }
+
+    .log-off {
+      width: 40px;
+      height: 18px;
+    }
+
+    .login-container {
+      margin: 0 25px 0 0;
+    }
+
+    .user-login {
+      width: 59px;
+      height: 18px;
+      text-align: right;
+    }
+  }
+}

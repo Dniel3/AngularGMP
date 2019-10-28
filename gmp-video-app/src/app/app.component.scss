@@ -1,0 +1,28 @@
+$pale-grey: #f2f3f7;
+$header-color: #414452;
+$white: #ffffff;
+
+.header-container,
+.footer-container {
+  height: 64px;
+  background-color: $header-color;
+}
+
+.footer-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 0 85px 0 0;
+}
+
+.page-container {
+  background-color: $pale-grey;
+  height: 80vh;
+}
+
+.breadcrum-container {
+  align-items: center;
+  display: flex;
+  height: 64px;
+  margin: 0 0 0 85px;
+}
