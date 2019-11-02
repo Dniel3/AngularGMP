@@ -5,11 +5,11 @@
       <div class="time-container">
         <div>
           <i class="far fa-clock"></i>
-          <span>{{course.duration}}</span>
+          <span>{{getFormatDuration(course.duration)}}</span>
         </div>
         <div>
           <i class="far fa-calendar-alt"></i>
-          <span>{{course.creationDate}}</span>
+          <span>{{course.creationDate | date: 'mediumDate'}}</span>
         </div>
       </div>
     </div>

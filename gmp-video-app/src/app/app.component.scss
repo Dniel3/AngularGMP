@@ -17,7 +17,7 @@ $white: #ffffff;
 
 .page-container {
   background-color: $pale-grey;
-  height: 80vh;
+  flex: 1;
 }
 
 .breadcrum-container {
@@ -25,4 +25,10 @@ $white: #ffffff;
   display: flex;
   height: 64px;
   margin: 0 0 0 85px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }

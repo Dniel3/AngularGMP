@@ -9,8 +9,8 @@ import { Course } from 'src/app/core/course-model';
 export class CourseListItemComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy {
   @Input() course: Course;
   @Output() remove = new EventEmitter<string>();
-  
-  constructor() { 
+
+  constructor() {
     console.log('contructor');
   }
 
@@ -38,7 +38,7 @@ export class CourseListItemComponent implements OnChanges, OnInit, DoCheck, Afte
     console.log('After content init');
   }
 
-  ngAfterContentChecked(){
+  ngAfterContentChecked() {
     console.log('After content checked');
   }
 
@@ -52,5 +52,11 @@ export class CourseListItemComponent implements OnChanges, OnInit, DoCheck, Afte
 
   ngOnDestroy() {
     console.log('On destroy');
+  }
+
+  getFormatDuration(duration: number): string {
+    const minutes = duration % 60;
+    const hours = (duration - minutes) / 60;
+    return `${hours} h ${minutes} min'`;
   }
 }

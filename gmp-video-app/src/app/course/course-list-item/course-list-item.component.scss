@@ -12,9 +12,9 @@ $cloudy-blue: #b9bdce;
   .actions {
     align-items: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin: 0 0 0 44px;
-    width: 8%;
+    width: 10%;
 
     button {
       background-color: #30b6dd;
@@ -43,7 +43,7 @@ $cloudy-blue: #b9bdce;
     display: flex;
     flex-direction: column;
     margin: 0 44px 0 0;
-    width: 93%;
+    width: 90%;
 
     .course {
       align-items: center;
@@ -54,7 +54,6 @@ $cloudy-blue: #b9bdce;
         align-items: center;
         display: flex;
         justify-content: space-evenly;
-        width: 10%;
 
         div {
           align-items: center;
@@ -66,6 +65,7 @@ $cloudy-blue: #b9bdce;
           font-family: FontAwesome;
           font-size: 16px;
           height: 16px;
+          margin: 0 10px 0 0;
           width: 14px;
         }
 
@@ -74,6 +74,7 @@ $cloudy-blue: #b9bdce;
           font-family: SourceSansPro;
           font-size: 12px;
           height: 15px;
+          margin: 0 10px 0 0;
         }
       }
 
