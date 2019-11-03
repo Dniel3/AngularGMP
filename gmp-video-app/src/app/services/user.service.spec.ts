@@ -9,4 +9,9 @@ describe('UserService', () => {
     const service: UserService = TestBed.get(UserService);
     expect(service).toBeTruthy();
   });
+
+  it('should return user', () => {
+    const service: UserService = TestBed.get(UserService);
+    expect(service.get()).toBeDefined();
+  });
 });

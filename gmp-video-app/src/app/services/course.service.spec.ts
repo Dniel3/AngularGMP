@@ -9,4 +9,9 @@ describe('CourseService', () => {
     const service: CourseService = TestBed.get(CourseService);
     expect(service).toBeTruthy();
   });
+
+  it('should return courses', () => {
+    const service: CourseService = TestBed.get(CourseService);
+    expect(service.get()).toBeDefined();
+  })
 });

@@ -5,23 +5,23 @@
       <div class="time-container">
         <div>
           <i class="far fa-clock"></i>
-          <span>{{getFormatDuration(course.duration)}}</span>
+          <span id="course-duration">{{getFormatDuration(course.duration)}}</span>
         </div>
         <div>
           <i class="far fa-calendar-alt"></i>
-          <span>{{course.creationDate | date: 'mediumDate'}}</span>
+          <span id="course-date">{{course.creationDate | date: 'mediumDate'}}</span>
         </div>
       </div>
     </div>
     <div>
-      <p>{{course.description}}</p>
+      <p id="course-description">{{course.description}}</p>
     </div>
   </div>
   <div class="actions">
-    <button (click)="edit()">
+    <button id="edit-item" (click)="edit()">
       <i class="fas fa-pen"></i><span> edit</span>
     </button>
-    <button (click)="delete()">
+    <button id='delete-item' (click)="delete()">
       <i class="fas fa-trash"></i><span> delete</span>
     </button>
   </div>

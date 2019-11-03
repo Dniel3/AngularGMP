@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from 'src/app/services/course.service';
-import { Course } from 'src/app/core/course-model';
+import { CourseService } from '../../services/course.service';
+import { Course } from '../../core/course-model';
 
 @Component({
   selector: 'gmp-course-list',

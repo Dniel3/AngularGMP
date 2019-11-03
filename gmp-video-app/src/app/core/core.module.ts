@@ -8,11 +8,15 @@ import { LogoComponent } from './logo/logo.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, BreadcrumComponent, LogoComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    BreadcrumComponent,
+    LogoComponent,
+  ],
   imports: [
     CommonModule
   ],
   exports: [HeaderComponent, FooterComponent, BreadcrumComponent],
-
 })
 export class CoreModule { }
