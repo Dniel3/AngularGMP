@@ -16,7 +16,6 @@ describe('BreadcrumComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BreadcrumComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

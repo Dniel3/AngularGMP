@@ -26,11 +26,11 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render user name', () => {
+  it('should render logo', () => {
     expect(nativeComponent.querySelector('gmp-logo')).toBeDefined();
   });
 
   it('should render user name', () => {
-    expect(nativeComponent.querySelector('.user-login').textContent).toBe(' Welcome cosme');
+    expect(nativeComponent.querySelector('.user-login').textContent).toContain(' Welcome cosme');
   });
 });
