@@ -46,4 +46,18 @@ describe('SectionComponent', () => {
 
     expect(consoleSpy).toHaveBeenCalledWith(course);
   });
+
+  it('should emit search string when clicking button', () => {
+    const input = nativeComponent.querySelector<HTMLInputElement>('input');
+    const searchTest = "kalinka";
+    input.value = searchTest;
+    let expectedText;
+    component.search.subscribe((input) => {expectedText = input;})
+
+    input.dispatchEvent(new Event('input'));
+    nativeComponent.querySelector<HTMLButtonElement>('button').click();
+    fixture.detectChanges();
+
+    expect(expectedText).toContain(searchTest);
+  });
 });

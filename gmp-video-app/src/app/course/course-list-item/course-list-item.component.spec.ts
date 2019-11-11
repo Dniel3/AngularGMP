@@ -1,8 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseListItemComponent } from './course-list-item.component';
-import { Course } from 'src/app/core/course-model';
+import { Course } from '../../core/course-model';
 import { Component } from '@angular/core';
+import { DurationPipe } from './duration.pipe';
+import { By } from '@angular/platform-browser';
 
 @Component({
   template: `
@@ -13,7 +15,7 @@ import { Component } from '@angular/core';
 class ItemHost {
   course: Course = {
     id: '1',
-    creationDate: 1,
+    creationDate: new Date('Oct 2 2019 13:11:19'),
     duration: 90,
     description: 'fake description',
     title: 'fake title',
@@ -31,7 +33,7 @@ describe('CourseListItemComponentHosted', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseListItemComponent, ItemHost]
+      declarations: [CourseListItemComponent, ItemHost, DurationPipe]
     }).compileComponents();
   }));
 
@@ -47,9 +49,9 @@ describe('CourseListItemComponentHosted', () => {
   });
 
   it('should render course information', () => {
-    expect(itemComponent.querySelector('.title').textContent).toBe(component.course.title);
+    expect(itemComponent.querySelector('.title').textContent).toBe(component.course.title.toUpperCase());
     expect(itemComponent.querySelector('#course-duration').textContent).toBe('1 h 30 min');
-    expect(itemComponent.querySelector('#course-date').textContent).toBe('Dec 31, 1969');
+    expect(itemComponent.querySelector('#course-date').textContent).toBe('Oct 2, 2019');
     expect(itemComponent.querySelector('#course-description').textContent).toBe(component.course.description);
   });
 
@@ -76,7 +78,7 @@ describe('CourseListItemComponent', () => {
   let nativeElement: HTMLElement;
   const fakeCourse: Course = {
     id: '1',
-    creationDate: 1,
+    creationDate: new Date('Oct 2 2019'),
     duration: 90,
     description: 'fake description',
     title: 'fake title',
@@ -84,7 +86,7 @@ describe('CourseListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseListItemComponent]
+      declarations: [CourseListItemComponent, DurationPipe]
     })
       .compileComponents();
   }));
@@ -102,9 +104,9 @@ describe('CourseListItemComponent', () => {
   });
 
   it('should render course information', () => {
-    expect(nativeElement.querySelector('.title').textContent).toBe(fakeCourse.title);
+    expect(nativeElement.querySelector('.title').textContent).toBe(fakeCourse.title.toUpperCase());
     expect(nativeElement.querySelector('#course-duration').textContent).toBe('1 h 30 min');
-    expect(nativeElement.querySelector('#course-date').textContent).toBe('Dec 31, 1969');
+    expect(nativeElement.querySelector('#course-date').textContent).toBe('Oct 2, 2019');
     expect(nativeElement.querySelector('#course-description').textContent).toBe(fakeCourse.description);
   });
 
@@ -124,6 +126,15 @@ describe('CourseListItemComponent', () => {
 
     expect(expectedId).toBe(fakeCourse.id);
   });
+
+  it('should render and change color for top rated course', () => {
+    component.course.topRated = true;
+
+    fixture.detectChanges();
+
+    expect(nativeElement.querySelector('.top-rated')).toBeDefined();
+    expect(nativeElement.querySelector('#top-rated')).toBeDefined();
+  });
 });
 
 describe('CourseListItemClass', () => {
@@ -135,12 +146,5 @@ describe('CourseListItemClass', () => {
 
   it('should create', () => {
     expect(componentInstance).toBeTruthy();
-  });
-
-  it('should format duration', () => {
-    const duration = 90;
-    const formattedDuration = '1 h 30 min';
-
-    expect(componentInstance.getFormatDuration(duration)).toEqual(formattedDuration);
   });
 });

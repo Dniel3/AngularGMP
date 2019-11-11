@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '../user-model';
 
 @Component({
@@ -6,16 +6,11 @@ import { User } from '../user-model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   user: User = {
     id: '1',
     name: 'cosme',
     lastName: 'fulanito'
   };
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 }

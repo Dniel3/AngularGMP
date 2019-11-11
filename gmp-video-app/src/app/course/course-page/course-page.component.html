@@ -1,2 +1,2 @@
-<gmp-section></gmp-section>
-<gmp-course-list></gmp-course-list>
+<gmp-section (search)="search($event)"></gmp-section>
+<gmp-course-list [filter]="search$ | async"></gmp-course-list>

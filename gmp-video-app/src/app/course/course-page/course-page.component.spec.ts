@@ -5,6 +5,9 @@ import { SectionComponent } from '../section/section.component';
 import { CourseListComponent } from '../course-list/course-list.component';
 import { CourseListItemComponent } from '../course-list-item/course-list-item.component';
 import { FormsModule } from '@angular/forms';
+import { OrderByPipe } from '../course-list/order-by.pipe';
+import { NewReleaseDirective } from '../course-list/new-release.directive';
+import { DurationPipe } from '../course-list-item/duration.pipe';
 
 describe('CoursePageComponent', () => {
   let component: CoursePageComponent;
@@ -16,6 +19,9 @@ describe('CoursePageComponent', () => {
         CoursePageComponent,
         CourseListComponent,
         CourseListItemComponent,
+        DurationPipe,
+        OrderByPipe,
+        NewReleaseDirective,
         SectionComponent,
       ],
       imports: [FormsModule,],

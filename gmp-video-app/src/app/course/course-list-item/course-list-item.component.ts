@@ -19,10 +19,4 @@ export class CourseListItemComponent {
   edit() {
     console.log('edit: ', this.course.id)
   }
-
-  getFormatDuration(duration: number): string {
-    const minutes = duration % 60;
-    const hours = (duration - minutes) / 60;
-    return `${hours} h ${minutes} min`;
-  }
 }

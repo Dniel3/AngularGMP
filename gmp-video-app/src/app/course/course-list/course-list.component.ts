@@ -1,16 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CourseService } from '../../services/course.service';
 import { Course } from '../../core/course-model';
+import { BehaviorSubject } from 'rxjs';
+import { FilterCoursePipe } from './filter-course.pipe';
 
 @Component({
   selector: 'gmp-course-list',
   templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.scss']
+  styleUrls: ['./course-list.component.scss'],
+  providers: [FilterCoursePipe]
 })
 export class CourseListComponent implements OnInit {
+  
   courses: Course[] = [];
   
-  constructor(private courseService: CourseService) {
+  @Input()
+  set filter(filter: string) {
+    this.courses = this.filterPipe.transform(this.courseService.get(), filter);
+  } 
+  
+  constructor(private readonly courseService: CourseService, 
+      private readonly filterPipe: FilterCoursePipe) {
    }
 
   ngOnInit() {

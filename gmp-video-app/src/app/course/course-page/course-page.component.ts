@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'gmp-course-page',
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss']
 })
-export class CoursePageComponent implements OnInit {
+export class CoursePageComponent {
+  private readonly search$ = new BehaviorSubject('');
 
   constructor() { }
 
-  ngOnInit() {
+  search(course: string) {
+    this.search$.next(course);
   }
+
 }

@@ -6,6 +6,10 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { CoursePageComponent } from './course-page/course-page.component';
 import { FormsModule } from '@angular/forms'
 import { SectionComponent } from './section/section.component';
+import { NewReleaseDirective } from './course-list/new-release.directive';
+import { DurationPipe } from './course-list-item/duration.pipe';
+import { OrderByPipe } from './course-list/order-by.pipe';
+import { FilterCoursePipe } from './course-list/filter-course.pipe';
 
 
 
@@ -15,6 +19,10 @@ import { SectionComponent } from './section/section.component';
     CourseListItemComponent,
     CoursePageComponent,
     SectionComponent,
+    NewReleaseDirective,
+    DurationPipe,
+    OrderByPipe,
+    FilterCoursePipe,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,10 @@
 $slate-gray: #525462;
 $cloudy-blue: #b9bdce;
 
+.top-rated {
+  background-color: gold !important;
+}
+
 .container {
   background-color: #ffffff;
   border-radius: 8px;
@@ -84,6 +88,7 @@ $cloudy-blue: #b9bdce;
         font-weight: 600;
         height: 30px;
         line-height: 1.25;
+        margin: 0 10px 0 0;
         width: 263px;
       }
 
@@ -98,5 +103,4 @@ $cloudy-blue: #b9bdce;
       }
     }
   }
-
 }

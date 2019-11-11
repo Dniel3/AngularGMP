@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'gmp-section',
   templateUrl: './section.component.html',
   styleUrls: ['./section.component.scss']
 })
-export class SectionComponent implements OnInit {
+export class SectionComponent {
   course = '';
+
+  @Output() search = new EventEmitter<string>();
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
-  search() {
+  searchCourse() {
     console.log(this.course);
+    this.search.emit(this.course);
   }
 }
