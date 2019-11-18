@@ -1,11 +1,11 @@
 <div class="container">
   <gmp-logo></gmp-logo>
-  <div class="user-login-container">
+  <div *ngIf="isAuth()" class="user-login-container">
     <div class="login-container">
       <img src="assets/ic-user.svg" class="ic_user">
       <span class="user-login"> Welcome {{user.name}}</span>
     </div>
-    <div>
+    <div (click)="logOut()" id='log-out-container'>
       <img src="assets/ic-exit.svg" class="ic_exit">
       <span class="log-off"> Log off</span>
     </div>

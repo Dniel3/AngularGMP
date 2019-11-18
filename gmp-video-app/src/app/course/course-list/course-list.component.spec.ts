@@ -37,13 +37,13 @@ describe('CourseListComponent', () => {
       title: 'Dative',
       creationDate: new Date(),
       duration: 120,
-      description: 'Dative case.',
+      description: 'DagetListe case.',
       topRated: true,
     },
   ];
 
   beforeEach(async(() => {
-    fakeCourseService = jasmine.createSpyObj('CourseService', ['get']);
+    fakeCourseService = jasmine.createSpyObj('CourseService', ['get', 'delete']);
     fakeCourseService.get.and.returnValue(fakeCourseList);
 
     TestBed.configureTestingModule({
@@ -80,11 +80,12 @@ describe('CourseListComponent', () => {
   })
 
   it('should call remove when clicking delete item button', () => {
-    const consoleSpy = spyOn(console, 'log');
+    const confirmSpy = spyOn(window, 'confirm');
+    confirmSpy.and.returnValue(true);
 
     nativeComponent.querySelector<HTMLButtonElement>('#delete-item').click();
 
-    expect(consoleSpy).toHaveBeenCalledWith('Parent delete:', fakeCourseList[0].id);
+    expect(fakeCourseService.delete).toHaveBeenCalledWith(fakeCourseList[0].id);
   });
 
   it('should log text when clicking Load more bar', () => {

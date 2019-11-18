@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from '../user-model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'gmp-header',
@@ -8,9 +9,18 @@ import { User } from '../user-model';
 })
 export class HeaderComponent {
 
-  user: User = {
-    id: '1',
-    name: 'cosme',
-    lastName: 'fulanito'
-  };
+  user?: User
+
+  constructor(private readonly userService: UserService) {
+    this.user = userService.get();
+  }
+
+  isAuth(): boolean {
+    return this.userService.isLoggedIn();
+  }
+
+  logOut() {
+    this.userService.logout();
+    console.log('log-out: ', this.user.name);
+  }
 }

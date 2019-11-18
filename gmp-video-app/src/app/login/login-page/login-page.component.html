@@ -1,0 +1,10 @@
+<div class="login-container">
+  <h1>Login</h1>
+  <div class="text-field-container"><span>E-mail</span><span>*required</span></div>
+  <input [(ngModel)]="email" type="text" id="login-email" placeholder="Enter e-mail">
+  <div class="text-field-container"><span>password</span><span>*required</span></div>
+  <input [(ngModel)]="password" type="text" id="login-pass" placeholder="Enter password">
+  <div>
+      <a>Forgot Password?</a><button (click)="login()">Login</button>
+  </div>
+</div>

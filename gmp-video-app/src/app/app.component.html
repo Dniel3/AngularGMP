@@ -2,7 +2,7 @@
   <div class="header-container">
     <gmp-header></gmp-header>
   </div>
-  <div class="breadcrum-container">
+  <div *ngIf="isAuth()" class="breadcrum-container">
     <gmp-breadcrum></gmp-breadcrum>
   </div>
   <div class="page-container">

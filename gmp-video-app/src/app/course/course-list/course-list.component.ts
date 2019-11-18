@@ -28,7 +28,10 @@ export class CourseListComponent implements OnInit {
   }
 
   remove(id: string) {
-    console.log('Parent delete:', id);
+    if(window.confirm("Do you reallu want to delete this course?")) {
+      this.courseService.delete(id);
+      this.courses = this.courseService.get();
+    }
   }
 
   loadMore() {

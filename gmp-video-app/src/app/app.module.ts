@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CourseModule } from './course/course.module';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoreModule,
     CourseModule,
     BrowserAnimationsModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
