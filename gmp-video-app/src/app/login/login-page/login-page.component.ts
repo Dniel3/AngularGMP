@@ -17,5 +17,6 @@ export class LoginPageComponent implements OnInit {
 
   login(){
     this.userService.login();
+    console.log('logged in successfully');
   }
 }
