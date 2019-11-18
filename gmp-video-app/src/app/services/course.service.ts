@@ -47,10 +47,39 @@ export class CourseService {
       description: this.longDescription,
     };
 
+    const commingCreationDate = new Date();
+    commingCreationDate.setDate(delayedCreationDate.getDate() + 18);
+    const commingCourse: Course =     {
+      id: '5',
+      title: 'Course  5',
+      creationDate: commingCreationDate,
+      duration: 40,
+      description: this.longDescription,
+    };
+
     this.courses.push(oldCourse);
+    this.courses.push(commingCourse);
    }
 
   get(): Course[] {
     return this.courses;
+  }
+
+  create(course: Course) {
+    this.courses.push(course);
+  }
+
+  getById(id: string): Course|undefined {
+    return this.courses.find(course => course.id === id);
+  }
+
+  update(updatedCourse: Course) {
+    const courseIndex = this.courses.findIndex(course => course.id === updatedCourse.id);
+
+    this.courses[courseIndex] = updatedCourse;
+  }
+
+  delete(id: string) {
+    this.courses = this.courses.filter(course => course.id !== id);
   }
 }
