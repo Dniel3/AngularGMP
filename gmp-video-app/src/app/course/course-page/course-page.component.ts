@@ -7,12 +7,12 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent {
-  private readonly search$ = new BehaviorSubject('');
+  private search = '';
 
   constructor() { }
 
-  search(course: string) {
-    this.search$.next(course);
+  searchCourse(course: string) {
+    this.search = course;
   }
 
 }

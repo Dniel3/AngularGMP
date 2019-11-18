@@ -1,5 +1,5 @@
 import { NewReleaseDirective } from "./new-release.directive";
-import { ElementRef, Component } from '@angular/core';
+import { ElementRef, Component, Renderer2, Type } from '@angular/core';
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
 import { CourseListItemComponent } from '../course-list-item/course-list-item.component';
 import { Course } from '../../core/course-model';
@@ -25,11 +25,12 @@ class ItemHost {
 describe('NewReleaseDirective', () => {
   let component: ItemHost;
   let fixture: ComponentFixture<ItemHost>;
-  let itemComponent: HTMLElement;
+  let render2: Renderer2;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseListItemComponent, ItemHost, DurationPipe, NewReleaseDirective]
+      declarations: [CourseListItemComponent, ItemHost, DurationPipe, NewReleaseDirective],
+      providers: [Renderer2],
     }).compileComponents();
   }));
 
@@ -37,11 +38,11 @@ describe('NewReleaseDirective', () => {
     fixture = TestBed.createComponent(ItemHost);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    itemComponent = fixture.nativeElement.querySelector('gmp-course-list-item');
+    render2 = fixture.componentRef.injector.get<Renderer2>(Renderer2 as Type<Renderer2>);
   });
   
   it('should create an instance', () => {
-    const directive = new NewReleaseDirective({} as ElementRef);
+    const directive = new NewReleaseDirective({} as ElementRef, render2);
     expect(directive).toBeTruthy();
   });
 
@@ -49,6 +50,17 @@ describe('NewReleaseDirective', () => {
     const course = fixture.debugElement.query(By.directive(NewReleaseDirective));
 
     expect(course.childNodes[0].nativeNode.style.border).toBe('5px solid green');
+  });
+
+  it('should render upcomming course', () => {
+    const course = fixture.debugElement.query(By.directive(NewReleaseDirective));
+    const greaterDate = new Date();
+    greaterDate.setDate(greaterDate.getDate() + 14);
+    component.course.creationDate = greaterDate;
+
+    fixture.detectChanges();
+
+    expect(course.childNodes[0].nativeNode.style.border).toBe('5px solid blue');
   });
 
   it('should render non styled course', () => {

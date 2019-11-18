@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[gmpNewRelease]'
@@ -14,9 +14,13 @@ export class NewReleaseDirective {
     if(creationDate < currentDate && creationDate >= freshThreshold) {
       borderColor = '5px solid green';
     }
-    this.courseBox.nativeElement.firstChild.style.border = borderColor;
+    if(creationDate > currentDate) {
+      borderColor = '5px solid blue';
+    }
+
+    this.render2.setStyle(this.courseBox.nativeElement.firstChild, 'border', borderColor)
   }
 
-  constructor(private courseBox: ElementRef<any>) { }
+  constructor(private courseBox: ElementRef<any>, private render2: Renderer2) { }
 
 }
