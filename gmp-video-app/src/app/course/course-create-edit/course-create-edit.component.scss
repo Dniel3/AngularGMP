@@ -1,0 +1,114 @@
+.course-container {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  margin: 24px 0 0;
+
+  .course-box {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 24px 0 rgba(18, 21, 35, 0.08);
+    height: 590px;
+    padding: 24px;
+    width: 731px;
+
+    h1 {
+      font-family: SourceSansPro;
+      font-size: 24px;
+      font-weight: 600;
+      height: 30px;
+      line-height: 1.25;
+      margin: 0 0 24px;
+    }
+
+    .text-row {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0 9px;
+
+      .text {
+        color: #525462;
+        height: 17px;
+        letter-spacing: 0.22px;
+        font-family: SourceSansPro;
+        font-size: 14px;
+        font-weight: 600;
+        width: 126px;
+      }
+
+      .hint {
+        color: #6c7283;
+        height: 18px;
+        letter-spacing: 0.19px;
+        line-height: 1.5;
+        font-family: SourceSansPro;
+        font-size: 12px;
+        text-align: right;
+        width: 50px;
+      }
+    }
+
+    .actions {
+      align-items: center;
+      display: flex;
+      justify-content: flex-end;
+      margin: 24px 0 0;
+
+      button {
+        border-radius: 3px;
+        height: 36px;
+        width: 68px;
+        font-family: SourceSansPro;
+      }
+
+      .cancel {
+        color: #5b616f;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: -0.1px;
+        line-height: 2.43;
+        margin: 0 12px 0 0;
+      }
+
+      .save {
+        color: white;
+        background-color: #9bc837;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: -0.1px;
+        line-height: 2.43;
+      }
+    }
+
+    .new-course-duration,
+    .new-course-date {
+      width: 150px;
+    }
+
+    .duration-row {
+      align-items: center;
+      display: flex;
+      
+      input {
+        margin: 0 12px 0 0;
+        width: 150px;
+      }
+    }
+
+    .new-course-authors {
+      width: 312px;
+    }
+
+    #new-course-description {
+      height: 108px;
+    }
+
+    input {
+      border: solid 1px #d9dbe3;
+      border-radius: 3px;
+      height: 36px;
+      width: 100%;
+    }
+  }
+}

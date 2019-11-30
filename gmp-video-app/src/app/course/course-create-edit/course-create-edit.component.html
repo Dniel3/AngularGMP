@@ -1,0 +1,32 @@
+<div class="course-container">
+  <div class="course-box">
+    <h1>New Course</h1>
+    <div class="text-row">
+      <span class="text">Title:</span><span class="hint">*required</span>
+    </div>
+    <input [(ngModel)]="title" type="text" id="new-course-title" placeholder="Enter course title">
+    <div class="text-row">
+      <span class="text">Description:</span><span class="hint">*required</span>
+    </div>
+    <input [(ngModel)]="description" type="text" id="new-course-description" placeholder="Add description">
+    <div class="text-row new-course-duration">
+      <span class="text">Duration:</span><span class="hint">*required</span>
+    </div>
+    <div class="duration-row">
+      <input [(ngModel)]="duration" type="number" id="new-course-duration" placeholder="minutes">
+      <span *ngIf="duration">{{duration | durationFormat}}</span>
+    </div>
+    <div class=" new-course-date text-row">
+      <span class="text">Date:</span><span class="hint">*required</span>
+    </div>
+    <input [(ngModel)]="creationDate" type="date" class="new-course-date" placeholder="Enter creation date">
+    <div class="text-row new-course-authors">
+      <span class="text">Authors:</span><span class="hint">*required</span>
+    </div>
+    <input [(ngModel)]="authors" type="text" class="new-course-authors" placeholder="Enter author(s)">
+    <div class="actions">
+      <button (click)="cancel()" class="cancel">Cancel</button>
+      <button (click)="save()" class="save">Save</button>
+    </div>
+  </div>
+</div>
