@@ -1,1 +1,6 @@
-<span>Courses</span>
+<ng-container *ngIf="breadCrums$ | async as breadCrums">
+  <a *ngFor="let breadCrum of breadCrums | slice: 0: breadCrums.length -1" [routerLink]="breadCrum">
+    > {{breadCrum}}
+  </a>
+  <span> > {{breadCrums[breadCrums.length -1]}}</span>
+</ng-container>

@@ -4,6 +4,8 @@ import { HeaderComponent } from './header.component';
 import { LogoComponent } from '../logo/logo.component';
 import { UserService } from '../../services/user.service';
 import { User } from '../user-model';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -20,6 +22,7 @@ describe('HeaderComponent', () => {
     fakeUserService = jasmine.createSpyObj('UserService', ['logout', 'isLoggedIn', 'get']);
     TestBed.configureTestingModule({
       declarations: [HeaderComponent, LogoComponent],
+      imports: [RouterTestingModule],
       providers: [{provide: UserService, useValue: fakeUserService},],
     }).compileComponents();
     fakeUserService.isLoggedIn.and.returnValue(false);
@@ -55,7 +58,7 @@ describe('HeaderComponent', () => {
       expect(nativeComponent.querySelector('.user-login').textContent).toContain(`Welcome ${fakeUser.name}`);
     });
 
-    it('should render logot button', () => {
+    it('should render logout button', () => {
       expect(nativeComponent.querySelector('.log-off')).toBeDefined();
     });
 
@@ -63,6 +66,14 @@ describe('HeaderComponent', () => {
       nativeComponent.querySelector<HTMLDivElement>('#log-out-container').click();
 
       expect(fakeUserService.logout).toHaveBeenCalled();
+    })
+
+    it('should redirect to login page when clicking logout', () => {
+      const routerSpy = spyOn(TestBed.get(Router), 'navigate');
+
+      nativeComponent.querySelector<HTMLDivElement>('#log-out-container').click();
+
+      expect(routerSpy).toHaveBeenCalledWith(['login']);
     })
   });
 });

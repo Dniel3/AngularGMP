@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { OrderByPipe } from '../course-list/order-by.pipe';
 import { NewReleaseDirective } from '../course-list/new-release.directive';
 import { DurationPipe } from '../course-list-item/duration.pipe';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CoursePageComponent', () => {
   let component: CoursePageComponent;
@@ -24,7 +25,7 @@ describe('CoursePageComponent', () => {
         NewReleaseDirective,
         SectionComponent,
       ],
-      imports: [FormsModule,],
+      imports: [FormsModule, RouterTestingModule],
     }).compileComponents();
   }));
 

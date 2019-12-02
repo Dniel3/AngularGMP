@@ -2,7 +2,8 @@
     <gmp-course-list-item *ngFor="let course of courses | orderBy" 
         [course]="course" 
         [gmpNewRelease]="course.creationDate"
-        (remove)="remove($event)">
+        (remove)="remove($event)"
+        (edit)="edit($event)">
     </gmp-course-list-item>
 </ng-container>
 <div *ngIf="!courses.length" id="empty-courses">

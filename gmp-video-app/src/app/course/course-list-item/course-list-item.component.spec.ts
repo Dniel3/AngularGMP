@@ -8,7 +8,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
   template: `
-     <gmp-course-list-item [course]="course" (remove)="remove($event)">
+     <gmp-course-list-item [course]="course" (remove)="remove($event)" (edit)="edit($event)">
      </gmp-course-list-item>
   `,
 })
@@ -23,6 +23,10 @@ class ItemHost {
 
   remove(id: string) {
     console.log('deleted', this.course.id);
+  }
+
+  edit(id: string) {
+    console.log('edited', this.course.id);
   }
 }
 
@@ -55,20 +59,20 @@ describe('CourseListItemComponentHosted', () => {
     expect(itemComponent.querySelector('#course-description').textContent).toBe(component.course.description);
   });
 
-  it('should log id when clicking edit button', () => {
-    const consoleSpy = spyOn(console, 'log');
-
-    itemComponent.querySelector<HTMLButtonElement>('#edit-item').click();
-
-    expect(consoleSpy).toHaveBeenCalledWith('edit: ', component.course.id);
-  });
-
   it('should deleted id when clicking delete button', () => {
     const consoleSpy = spyOn(console, 'log');
 
     itemComponent.querySelector<HTMLButtonElement>('#delete-item').click();
 
     expect(consoleSpy).toHaveBeenCalledWith('deleted', component.course.id);
+  });
+
+  it('should edit when clicking edit button', () => {
+    const consoleSpy = spyOn(console, 'log');
+
+    itemComponent.querySelector<HTMLButtonElement>('#edit-item').click();
+
+    expect(consoleSpy).toHaveBeenCalledWith('edited', component.course.id);
   });
 });
 
@@ -110,19 +114,20 @@ describe('CourseListItemComponent', () => {
     expect(nativeElement.querySelector('#course-description').textContent).toBe(fakeCourse.description);
   });
 
-  it('should log id when clicking edit button', () => {
-    const consoleSpy = spyOn(console, 'log');
-
-    nativeElement.querySelector<HTMLButtonElement>('#edit-item').click();
-
-    expect(consoleSpy).toHaveBeenCalledWith('edit: ', fakeCourse.id);
-  });
-
   it('should emit id when clicking delete button', () => {
     let expectedId: string;
     component.remove.subscribe((id: string) => { expectedId = id; });
 
     nativeElement.querySelector<HTMLButtonElement>('#delete-item').click();
+
+    expect(expectedId).toBe(fakeCourse.id);
+  });
+
+  it('should emit id when clicking edit button', () => {
+    let expectedId: string;
+    component.edit.subscribe((id: string) => { expectedId = id; });
+
+    nativeElement.querySelector<HTMLButtonElement>('#edit-item').click();
 
     expect(expectedId).toBe(fakeCourse.id);
   });

@@ -9,10 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CoursePageComponent {
   private search = '';
 
-  constructor() { }
-
   searchCourse(course: string) {
     this.search = course;
   }
-
 }

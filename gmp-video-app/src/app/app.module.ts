@@ -14,11 +14,11 @@ import { LoginModule } from './login/login.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     CoreModule,
     CourseModule,
     BrowserAnimationsModule,
     LoginModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

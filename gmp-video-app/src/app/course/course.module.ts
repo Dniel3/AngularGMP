@@ -11,6 +11,7 @@ import { DurationPipe } from './course-list-item/duration.pipe';
 import { OrderByPipe } from './course-list/order-by.pipe';
 import { FilterCoursePipe } from './course-list/filter-course.pipe';
 import { CourseCreateEditComponent } from './course-create-edit/course-create-edit.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -30,6 +31,7 @@ import { CourseCreateEditComponent } from './course-create-edit/course-create-ed
     CommonModule,
     FormsModule,
     MatCardModule,
+    RouterModule,
   ],
   exports: [
     CoursePageComponent,

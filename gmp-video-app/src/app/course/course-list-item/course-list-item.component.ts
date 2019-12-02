@@ -10,14 +10,13 @@ import { Course } from '../../core/course-model';
 export class CourseListItemComponent {
   @Input() course: Course;
   @Output() remove = new EventEmitter<string>();
-
-  constructor() {}
+  @Output() edit = new EventEmitter<string>();
 
   delete() {
     this.remove.emit(this.course.id);
   }
 
-  edit() {
-    console.log('edit: ', this.course.id)
+  editItem() {
+    this.edit.emit(this.course.id);
   }
 }

@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SectionComponent } from './section.component';
 import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('SectionComponent', () => {
   let component: SectionComponent;
@@ -11,7 +13,7 @@ describe('SectionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SectionComponent],
-      imports: [FormsModule,]
+      imports: [FormsModule, RouterTestingModule,]
     }).compileComponents();
   }));
 
@@ -59,5 +61,13 @@ describe('SectionComponent', () => {
     fixture.detectChanges();
 
     expect(expectedText).toContain(searchTest);
+  });
+
+  it('should redirect to create course page when clicking add', () => {
+    const routerSpy = spyOn(TestBed.get(Router), 'navigate');
+
+    nativeComponent.querySelector<HTMLButtonElement>('.add-action button').click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['courses', 'new']);
   });
 });
