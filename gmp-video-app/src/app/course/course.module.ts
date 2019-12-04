@@ -10,7 +10,6 @@ import { NewReleaseDirective } from './course-list/new-release.directive';
 import { DurationPipe } from './course-list-item/duration.pipe';
 import { OrderByPipe } from './course-list/order-by.pipe';
 import { FilterCoursePipe } from './course-list/filter-course.pipe';
-import { CourseCreateEditComponent } from './course-create-edit/course-create-edit.component';
 
 
 
@@ -24,7 +23,6 @@ import { CourseCreateEditComponent } from './course-create-edit/course-create-ed
     DurationPipe,
     OrderByPipe,
     FilterCoursePipe,
-    CourseCreateEditComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +31,7 @@ import { CourseCreateEditComponent } from './course-create-edit/course-create-ed
   ],
   exports: [
     CoursePageComponent,
+    DurationPipe,
   ]
 })
 export class CourseModule { }

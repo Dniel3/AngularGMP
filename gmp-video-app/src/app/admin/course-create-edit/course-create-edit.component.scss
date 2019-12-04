@@ -100,8 +100,12 @@
       width: 312px;
     }
 
-    #new-course-description {
+    #new-course-description,
+    textarea {
       height: 108px;
+      max-height: 108px;
+      max-width: 100%;
+      width: 100%;
     }
 
     input {

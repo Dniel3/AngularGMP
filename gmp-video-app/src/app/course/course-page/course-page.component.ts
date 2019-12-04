@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent {
-  private search = '';
+  search = '';
 
   constructor() { }
 

@@ -7,13 +7,13 @@ import { CourseModule } from './course/course.module';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './login/login.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [ AppComponent ],
   imports: [
     BrowserModule,
+    AdminModule,
     AppRoutingModule,
     CoreModule,
     CourseModule,

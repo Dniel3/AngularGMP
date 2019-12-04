@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CoursePageComponent } from './course/course-page/course-page.component';
 import { LoginPageComponent } from './login/login-page/login-page.component';
-import { CourseCreateEditComponent } from './course/course-create-edit/course-create-edit.component';
+import { CourseCreateEditComponent } from './admin/course-create-edit/course-create-edit.component';
 
 
 const routes: Routes = [

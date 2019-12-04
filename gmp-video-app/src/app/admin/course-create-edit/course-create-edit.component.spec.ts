@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseCreateEditComponent } from './course-create-edit.component';
 import { FormsModule } from '@angular/forms';
-import { DurationPipe } from '../course-list-item/duration.pipe';
+import { DurationPipe } from '../../course/course-list-item/duration.pipe';
 
 describe('CourseCreateEditComponent', () => {
   let component: CourseCreateEditComponent;
