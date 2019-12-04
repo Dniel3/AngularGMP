@@ -42,6 +42,7 @@ export class CourseCreateEditComponent {
      description: this.description,
      duration: this.duration,
      creationDate: new Date(this.creationDate),
+     topRated: isEditing ? this.course.topRated : undefined,
     };
 
     isEditing ? this.courseService.update(this.course) : this.courseService.create(this.course);

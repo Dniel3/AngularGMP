@@ -51,13 +51,13 @@ describe('BreadcrumComponent', () => {
   });
 
   it('should call course service to get course title', () => {
-    TestBed.get(Router).events.next(new NavigationEnd(0, '/courses/9', '/'));
+    TestBed.get(Router).events.next(new NavigationEnd(0, '/courses/9', '/courses/9'));
 
     expect(fakeCourseService.getById).toHaveBeenCalledWith('9');
   });
 
   it('should render breadcrum', () => {
-    TestBed.get(Router).events.next(new NavigationEnd(0, '/courses/9', '/'));
+    TestBed.get(Router).events.next(new NavigationEnd(0, '/courses/9', '/courses/9'));
     fixture.detectChanges();
     const breadCrumWithLink = fixture.nativeElement.querySelector('a');
     const breadCrumWithNoLink = fixture.nativeElement.querySelector('span');
