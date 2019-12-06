@@ -17,14 +17,29 @@ const routes: Routes = [
     path: 'courses', 
     component: CoursePageComponent,
     canActivate: [AuthGuard],
+    data: {
+      breadcrumb: 'courses',
+    },
   },
   { path: 'courses/:id', 
     component: CourseCreateEditComponent,
     canActivate: [AuthGuard],
+    data: {
+      breadcrumb: 'courses',
+    },
   },
-  { path: 'login', component: LoginPageComponent },
+  { 
+    path: 'login', 
+    component: LoginPageComponent,
+    data: {
+      breadcrumb: 'not found',
+    },
+  },
   {
     path: '**', component: NotFoundPageComponent,
+    data: {
+      breadcrumb: 'not found',
+    },
   },
 ];
 

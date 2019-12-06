@@ -1,8 +1,9 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter, map, startWith } from 'rxjs/operators';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter, map, startWith, distinctUntilChanged } from 'rxjs/operators';
 import { CourseService } from '../../services/course.service';
 import { Observable } from 'rxjs';
+import { BreadCrumb } from './breadcrum-model';
 
 @Component({
   selector: 'gmp-breadcrum',
@@ -11,19 +12,45 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumComponent {
-  readonly breadCrums$: Observable<string[]>;
-  constructor(router: Router, courseService: CourseService) {
+  readonly breadCrums$: Observable<BreadCrumb[]>;
+  constructor(router: Router, private readonly courseService: CourseService, activatedRoute: ActivatedRoute) {
     this.breadCrums$ = router.events.pipe(
-      startWith(new NavigationEnd(0, '/courses', '/courses')),
       filter(event => event instanceof NavigationEnd),
-      map((router: NavigationEnd) => {
-        const paths = router.urlAfterRedirects;
-        const breadCrums = paths.split('/').filter(Boolean);
-        if (breadCrums[0] === 'courses' && breadCrums.length === 2 && breadCrums[1] !== 'new') {
-          const currentCourse = courseService.getById(breadCrums[breadCrums.length - 1]);
-          breadCrums[breadCrums.length - 1] = currentCourse.title;
-        }
-        return breadCrums;
-      }));
+      map(event => this.buildBreadCrumb(activatedRoute.root)));    
   }
+
+  private buildBreadCrumb(route: ActivatedRoute, url: string = '', 
+                breadcrumbs: BreadCrumb[] = []): BreadCrumb[] {
+                  console.log(route);
+    const label = route.routeConfig ? route.routeConfig.data[ 'breadcrumb' ] : 'Home';
+    const path = route.routeConfig ? route.routeConfig.path : '';
+
+    const nextUrl = `${url}${path}/`;
+    const breadcrumb: BreadCrumb = {
+        label: label,
+        url: nextUrl
+    };
+
+    let newBreadcrumbs = [...breadcrumbs, breadcrumb];
+
+    const courseId = route.snapshot.paramMap.has('id') ? route.snapshot.paramMap.get('id') : '';
+
+    if(courseId) {
+      const courseBreadcrum = {
+        label: 'new',
+        url: null,
+      };
+
+      breadcrumb.url = breadcrumb.url.replace(':id/', '');
+      const course = courseId !== 'new' ? this.courseService.getById(courseId) : undefined;
+      courseBreadcrum.label = course ? course.title : 'new';
+      courseBreadcrum.url = `courses/${courseId}`;
+      newBreadcrumbs.push(courseBreadcrum);
+    }
+
+    if (route.firstChild) {
+        return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
+    }
+    return newBreadcrumbs;
+}
 }

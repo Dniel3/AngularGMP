@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BreadcrumComponent } from './breadcrum.component';
-import { Router, NavigationEnd, RouterModule, RouterEvent } from '@angular/router';
+import { Router, NavigationEnd, RouterModule, RouterEvent, ActivatedRoute } from '@angular/router';
 import { CourseService } from '../../services/course.service';
 import { of as observableOf, ReplaySubject } from 'rxjs';
 import { Course } from '../course-model';
@@ -44,6 +44,15 @@ describe('BreadcrumComponent', () => {
     fixture = TestBed.createComponent(BreadcrumComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    TestBed.get(ActivatedRoute).firstChild = {routeConfig: {
+      breadcrumb: 'courses',
+      path: 'courses/:id'
+
+    },
+    snapshot: {
+      paramMap: [['id', '9']],
+    }
+  };
   });
 
   it('should create', () => {
@@ -60,9 +69,9 @@ describe('BreadcrumComponent', () => {
     TestBed.get(Router).events.next(new NavigationEnd(0, '/courses/9', '/courses/9'));
     fixture.detectChanges();
     const breadCrumWithLink = fixture.nativeElement.querySelector('a');
-    const breadCrumWithNoLink = fixture.nativeElement.querySelector('span');
 
-    expect(breadCrumWithLink.innerText).toContain('courses');
-    expect(breadCrumWithNoLink.innerText).toContain(fakeCourse.title);
+    expect(breadCrumWithLink[0].innerText).toContain('courses');
+    expect(breadCrumWithLink[1].innerText).toContain('courses');
+    expect(breadCrumWithLink[2].innerText).toContain(fakeCourse.title);
   });
 });
