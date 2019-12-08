@@ -7,6 +7,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from '../../services/course.service';
 import { Course } from '../../core/course-model';
+import { CourseAuthorComponent } from '../course-author/course-author.component';
+import { CourseDateComponent } from '../course-date/course-date.component';
+import { CourseDurationComponent } from '../course-duration/course-duration.component';
 
 describe('CourseCreateEditComponent', () => {
   let component: CourseCreateEditComponent;
@@ -24,7 +27,13 @@ describe('CourseCreateEditComponent', () => {
   beforeEach(async(() => {
     fakeCourseService = jasmine.createSpyObj('CourseService', ['create', 'update', 'getById']);
     TestBed.configureTestingModule({
-      declarations: [CourseCreateEditComponent, DurationPipe,],
+      declarations: [
+        CourseAuthorComponent,
+        CourseDateComponent,
+        CourseDurationComponent,
+        CourseCreateEditComponent, 
+        DurationPipe,
+      ],
       imports: [FormsModule, RouterTestingModule],
       providers: [
         {

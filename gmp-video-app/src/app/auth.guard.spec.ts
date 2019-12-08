@@ -3,12 +3,12 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { AuthGuard } from './auth.guard';
 import { UserService } from './services/user.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { LoginPageComponent } from './login/login-page/login-page.component';
+import { Router } from '@angular/router';
 import { LoginModule } from './login/login.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CourseModule } from './course/course.module';
 import { CoreModule } from './core/core.module';
+import { AdminModule } from './admin/admin.module';
 
 describe('AuthGuard', () => {
   let fakeUserService: jasmine.SpyObj<UserService>;
@@ -17,6 +17,7 @@ describe('AuthGuard', () => {
     fakeUserService = jasmine.createSpyObj('UserService', ['isLoggedIn']);
     TestBed.configureTestingModule({
       imports: [
+        AdminModule,
         CourseModule,
         CoreModule,
         LoginModule,

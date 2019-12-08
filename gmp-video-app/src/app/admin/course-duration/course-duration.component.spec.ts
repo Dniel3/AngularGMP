@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseDurationComponent } from './course-duration.component';
+import { FormsModule } from '@angular/forms';
+import { DurationPipe } from 'src/app/course/course-list-item/duration.pipe';
 
 describe('CourseDurationComponent', () => {
   let component: CourseDurationComponent;
@@ -8,7 +10,8 @@ describe('CourseDurationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseDurationComponent ]
+      declarations: [CourseDurationComponent, DurationPipe],
+      imports: [FormsModule],
     })
     .compileComponents();
   }));
