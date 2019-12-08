@@ -19,6 +19,7 @@ import { AdminModule } from './admin/admin.module';
     CourseModule,
     BrowserAnimationsModule,
     LoginModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

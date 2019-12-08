@@ -10,6 +10,8 @@ import { NewReleaseDirective } from './new-release.directive';
 import { OrderByPipe } from './order-by.pipe';
 import { DurationPipe } from '../course-list-item/duration.pipe';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
@@ -48,7 +50,7 @@ describe('CourseListComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [CourseListComponent, CourseListItemComponent, DurationPipe, NewReleaseDirective, OrderByPipe],
-      imports: [FormsModule,],
+      imports: [FormsModule, RouterTestingModule,],
       providers: [
         {
           provide: CourseService,  useValue: fakeCourseService,
@@ -86,6 +88,14 @@ describe('CourseListComponent', () => {
     nativeComponent.querySelector<HTMLButtonElement>('#delete-item').click();
 
     expect(fakeCourseService.delete).toHaveBeenCalledWith(fakeCourseList[0].id);
+  });
+
+  it('should redirect to edit pages when clicking edit item button', () => {
+    const routerSpy = spyOn(TestBed.get(Router), 'navigate');
+
+    nativeComponent.querySelector<HTMLButtonElement>('#edit-item').click();
+
+    expect(routerSpy).toHaveBeenCalledWith(['courses', fakeCourseList[0].id]);
   });
 
   it('should log text when clicking Load more bar', () => {

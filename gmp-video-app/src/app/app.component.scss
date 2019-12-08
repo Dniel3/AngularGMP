@@ -25,6 +25,10 @@ $white: #ffffff;
   display: flex;
   min-height: 64px;
   margin: 0 0 0 85px;
+
+  gmp-breadcrum {
+    width: 100%;
+  }
 }
 
 .wrapper {

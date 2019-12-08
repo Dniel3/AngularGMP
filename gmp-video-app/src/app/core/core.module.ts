@@ -4,6 +4,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BreadcrumComponent } from './breadcrum/breadcrum.component';
 import { LogoComponent } from './logo/logo.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,9 +15,11 @@ import { LogoComponent } from './logo/logo.component';
     FooterComponent,
     BreadcrumComponent,
     LogoComponent,
+    NotFoundPageComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule, 
+    RouterModule,
   ],
   exports: [HeaderComponent, FooterComponent, BreadcrumComponent],
 })

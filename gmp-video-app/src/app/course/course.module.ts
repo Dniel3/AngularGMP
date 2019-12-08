@@ -10,6 +10,7 @@ import { NewReleaseDirective } from './course-list/new-release.directive';
 import { DurationPipe } from './course-list-item/duration.pipe';
 import { OrderByPipe } from './course-list/order-by.pipe';
 import { FilterCoursePipe } from './course-list/filter-course.pipe';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -28,6 +29,7 @@ import { FilterCoursePipe } from './course-list/filter-course.pipe';
     CommonModule,
     FormsModule,
     MatCardModule,
+    RouterModule,
   ],
   exports: [
     CoursePageComponent,

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'gmp-course-page',
@@ -9,10 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CoursePageComponent {
   search = '';
 
-  constructor() { }
-
   searchCourse(course: string) {
     this.search = course;
   }
-
 }

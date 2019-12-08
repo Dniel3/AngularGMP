@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'gmp-section',
@@ -10,10 +11,14 @@ export class SectionComponent {
 
   @Output() search = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private readonly router: Router) { }
 
   searchCourse() {
     console.log(this.course);
     this.search.emit(this.course);
+  }
+
+  add() {
+    this.router.navigate(['courses','new']);
   }
 }
