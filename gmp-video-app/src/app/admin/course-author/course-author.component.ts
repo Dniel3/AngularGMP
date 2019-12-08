@@ -5,11 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './course-author.component.html',
   styleUrls: ['./course-author.component.scss']
 })
-export class CourseAuthorComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class CourseAuthorComponent {
+  authors = '';
 }

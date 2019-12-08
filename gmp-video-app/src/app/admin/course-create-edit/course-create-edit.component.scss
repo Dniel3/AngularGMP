@@ -81,23 +81,13 @@
       }
     }
 
-    .new-course-duration,
-    .new-course-date {
-      width: 150px;
-    }
-
     .duration-row {
       align-items: center;
       display: flex;
       
       input {
-        margin: 0 12px 0 0;
         width: 150px;
       }
-    }
-
-    .new-course-authors {
-      width: 312px;
     }
 
     #new-course-description,

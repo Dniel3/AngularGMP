@@ -1,1 +1,2 @@
-<p>course-duration works!</p>
+<input [(ngModel)]="duration" type="number" placeholder="minutes">
+<span *ngIf="duration">{{duration | durationFormat}}</span>

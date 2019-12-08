@@ -5,11 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './course-duration.component.html',
   styleUrls: ['./course-duration.component.scss']
 })
-export class CourseDurationComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class CourseDurationComponent {
+  duration: number|undefined;
 }

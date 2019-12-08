@@ -13,17 +13,16 @@
       <span class="text">Duration:</span><span class="hint">*required</span>
     </div>
     <div class="duration-row">
-      <input [(ngModel)]="duration" type="number" id="new-course-duration" placeholder="minutes">
-      <span *ngIf="duration">{{duration | durationFormat}}</span>
+      <gmp-course-duration></gmp-course-duration>
     </div>
     <div class=" new-course-date text-row">
       <span class="text">Date:</span><span class="hint">*required</span>
     </div>
-    <input [(ngModel)]="creationDate" type="date" class="new-course-date" placeholder="Enter creation date">
+    <gmp-course-date></gmp-course-date>
     <div class="text-row new-course-authors">
       <span class="text">Authors:</span><span class="hint">*required</span>
     </div>
-    <input [(ngModel)]="authors" type="text" class="new-course-authors" placeholder="Enter author(s)">
+    <gmp-course-author></gmp-course-author>
     <div class="actions">
       <button (click)="cancel()" class="cancel">Cancel</button>
       <button (click)="save()" class="save">Save</button>

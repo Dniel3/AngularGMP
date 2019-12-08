@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { CourseDateComponent } from '../course-date/course-date.component';
+import { CourseDurationComponent } from '../course-duration/course-duration.component';
+import { CourseAuthorComponent } from '../course-author/course-author.component';
 
 @Component({
   selector: 'gmp-course-create-edit',
@@ -8,17 +11,20 @@ import { Component } from '@angular/core';
 export class CourseCreateEditComponent {
   title = '';
   description = '';
-  duration: number|undefined;
-  creationDate: Date|undefined;
-  authors = '';
+  @ViewChild(CourseDurationComponent, {static:false})
+  duration: HTMLElement|undefined;
+
+  @ViewChild(CourseDateComponent, {static:false})
+  creationDate: CourseDateComponent|undefined;
+
+  @ViewChild(CourseAuthorComponent, {static:false})
+  authors: HTMLElement|undefined;
 
   constructor() { }
 
   cancel() {
-
   }
 
   save() {
-    
   }
 }
