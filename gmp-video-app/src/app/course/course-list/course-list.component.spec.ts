@@ -4,7 +4,7 @@ import { CourseListComponent } from './course-list.component';
 import { CourseListItemComponent } from '../course-list-item/course-list-item.component';
 import { FormsModule } from '@angular/forms';
 import { CourseService } from '../../services/course.service';
-import { Course } from '../../core/course-model';
+import { Course } from '../../core/model/course-model';
 import { FilterCoursePipe } from './filter-course.pipe';
 import { NewReleaseDirective } from './new-release.directive';
 import { OrderByPipe } from './order-by.pipe';
@@ -12,6 +12,8 @@ import { DurationPipe } from '../course-list-item/duration.pipe';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { of as observableOf, observable} from "rxjs";
+
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
@@ -21,32 +23,32 @@ describe('CourseListComponent', () => {
 
   const fakeCourseList: Course[] = [   
     {
-      id: '22',
-      title: 'Genitive',
-      creationDate: new Date('Fri Oct 25 2019 13:11:19'),
-      duration: 100,
+      id: 22,
+      name: 'Genitive',
+      date: new Date('Fri Oct 25 2019 13:11:19').toISOString(),
+      length: 100,
       description: 'Genitive case.',
     },
     {
-      id: 'oldest',
-      title: 'Accusative',
-      creationDate: new Date('Oct 2 2019 13:11:19'),
-      duration: 90,
+      id: 33,
+      name: 'Accusative',
+      date: new Date('Oct 2 2019 13:11:19').toISOString(),
+      length: 90,
       description: 'Accusative case.',
     },
     {
-      id: 'newest',
-      title: 'Dative',
-      creationDate: new Date(),
-      duration: 120,
+      id: 44,
+      name: 'Dative',
+      date: new Date().toISOString(),
+      length: 120,
       description: 'DagetListe case.',
-      topRated: true,
+      isTopRated: true,
     },
   ];
 
   beforeEach(async(() => {
     fakeCourseService = jasmine.createSpyObj('CourseService', ['get', 'delete']);
-    fakeCourseService.get.and.returnValue(fakeCourseList);
+    fakeCourseService.get.and.returnValue(observableOf(fakeCourseList));
 
     TestBed.configureTestingModule({
       declarations: [CourseListComponent, CourseListItemComponent, DurationPipe, NewReleaseDirective, OrderByPipe],
@@ -98,28 +100,28 @@ describe('CourseListComponent', () => {
     expect(routerSpy).toHaveBeenCalledWith(['courses', fakeCourseList[0].id]);
   });
 
-  it('should log text when clicking Load more bar', () => {
+  it('should call get service when clicking Load more bar', () => {
     const consoleSpy = spyOn(console, 'log');
 
     nativeComponent.querySelector<HTMLDivElement>('#load-more').click();
 
-    expect(consoleSpy).toHaveBeenCalledWith('Load more');
+    expect(fakeCourseService.get).toHaveBeenCalledWith(0, 10, '');
   });
 
   it('should show no data bar for empty course list', () => {
-    fakeCourseService.get.and.returnValue([]);
+    fakeCourseService.get.and.returnValue(observableOf([]));
 
-    component.ngOnInit();
+    component.filter = '';
 
     expect(nativeComponent.querySelector<HTMLDivElement>('#empty-courses')).toBeDefined();
   });
 
-  it('should show filtered course', () => {
+  it('should call get service with filter string', () => {
     component.filter = 'genitive';
 
     fixture.detectChanges();
 
-    expect(nativeComponent.querySelectorAll<HTMLDivElement>('gmp-course-list-item').length).toBe(1);
+    expect(fakeCourseService.get).toHaveBeenCalledWith(0, 5, 'genitive');
   });
 
   it('should show sorted courses', () => {

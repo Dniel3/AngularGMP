@@ -1,34 +1,32 @@
 import { Injectable } from '@angular/core';
-import { User } from '../core/user-model';
+import { User } from '../core/model/user-model';
+import { Login, Token } from '../core/model/login-model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private user$: Observable<User>;
+  
+  constructor(private readonly http: HttpClient) { }
 
-  private user: User = {
-    id: '1',
-    name: 'Olek',
-    lastName: 'Pogrebniak',
+  get() {
+    const userUrl = 'http://localhost:3004/auth/userinfo'
+    this.user$ = this.http.post<User>(userUrl, {token: localStorage.getItem('token')});
   }
 
-  constructor() { }
-
-  get(): User {
-    return this.user;
+  getUser(): Observable<User> {
+    return this.user$;
   }
 
-  login(user: string = this.user.name, password: string = this.user.id) {
-    localStorage.setItem('user', user);
-    localStorage.setItem('lastName', this.user.lastName);
-    localStorage.setItem('id', this.user.id);
-    localStorage.setItem('token', user + password);
+  login(login: Login): Observable<Token> {
+    const loginUrl = 'http://localhost:3004/auth/login'
+    return this.http.post<Token>(loginUrl, login);
   }
 
   logout() {
-    localStorage.removeItem('user');
-    localStorage.removeItem('lastName');
-    localStorage.removeItem('id');
     localStorage.removeItem('token');
   }
 

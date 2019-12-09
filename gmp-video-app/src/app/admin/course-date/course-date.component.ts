@@ -6,5 +6,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-date.component.scss']
 })
 export class CourseDateComponent {
-  creationDate: Date|undefined;
+  creationDate: string|undefined;
 }

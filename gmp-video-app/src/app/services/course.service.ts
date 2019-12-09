@@ -1,85 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Course } from '../core/course-model';
+import { Course } from '../core/model/course-model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  private longDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' +
-    'tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ' +
-    'ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate ' +
-    'velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in ' +
-    'culpa qui officia deserunt mollit anim id est laborum';
-  
-  private courses: Course[] = [
-    {
-      id: '1',
-      title: 'Course 1',
-      creationDate: new Date,
-      duration: 120,
-      description: this.longDescription,
-      topRated: true,
-    },
-    {
-      id: '2',
-      title: 'Course 2',
-      creationDate: new Date(),
-      duration: 100,
-      description: this.longDescription,
-    },
-    {
-      id: '3',
-      title: 'Course 3',
-      creationDate: new Date(),
-      duration: 90,
-      description: this.longDescription,
-    },
-  ];
 
-  constructor() {
-    const delayedCreationDate = new Date();
-    delayedCreationDate.setDate(delayedCreationDate.getDate() - 18);
-    const oldCourse: Course =     {
-      id: '4',
-      title: 'Course  4',
-      creationDate: delayedCreationDate,
-      duration: 40,
-      description: this.longDescription,
+  constructor(private readonly http: HttpClient) {  }
+
+  get(start: number, count: number, textFragment: string): Observable<Course[]> {
+    const coursesUrl = 'http://localhost:3004/courses';
+    const params = {
+      'start': String(start),
+      'count': String(count),
+      'textFragment': textFragment,
     };
 
-    const commingCreationDate = new Date();
-    commingCreationDate.setDate(delayedCreationDate.getDate() + 18);
-    const commingCourse: Course =     {
-      id: '5',
-      title: 'Course  5',
-      creationDate: commingCreationDate,
-      duration: 40,
-      description: this.longDescription,
-    };
-
-    this.courses.push(oldCourse);
-    this.courses.push(commingCourse);
-   }
-
-  get(): Course[] {
-    return this.courses;
+    return this.http.get<Course[]>(coursesUrl, { params });
   }
 
-  create(course: Course) {
-    this.courses.push(course);
+  create(course: Course): Observable<Course> {
+    const coursesUrl = 'http://localhost:3004/courses';
+    return this.http.post<Course>(coursesUrl, course);
   }
 
-  getById(id: string): Course|undefined {
-    return this.courses.find(course => course.id === id);
+  getById(id: number): Observable<Course> {
+    const coursesUrl = `http://localhost:3004/courses/${id}`;
+    return this.http.get<Course>(coursesUrl);
   }
 
-  update(updatedCourse: Course) {
-    const courseIndex = this.courses.findIndex(course => course.id === updatedCourse.id);
-
-    this.courses[courseIndex] = updatedCourse;
+  update(updatedCourse: Course): Observable<Course> {
+    const coursesUrl = 'http://localhost:3004/courses';
+    return this.http.patch<Course>(coursesUrl, updatedCourse);
   }
 
-  delete(id: string) {
-    this.courses = this.courses.filter(course => course.id !== id);
+  delete(id: number): Observable<Course> {
+    const coursesUrl = `http://localhost:3004/courses/${id}`;
+    return this.http.delete<Course>(coursesUrl);
   }
 }

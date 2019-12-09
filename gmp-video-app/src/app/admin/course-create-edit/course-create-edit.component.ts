@@ -2,9 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { CourseDateComponent } from '../course-date/course-date.component';
 import { CourseDurationComponent } from '../course-duration/course-duration.component';
 import { CourseAuthorComponent } from '../course-author/course-author.component';
-import { Course } from 'src/app/core/course-model';
+import { Course } from '../../core/model/course-model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CourseService } from 'src/app/services/course.service';
+import { CourseService } from '../../services/course.service';
+import { switchMap, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'gmp-course-create-edit',
@@ -22,9 +23,6 @@ export class CourseCreateEditComponent {
   set durationComponent(duration: CourseDurationComponent) {
     if (duration) {
       this.duration = duration;
-      if (this.course) {
-        this.duration.duration = this.course.duration;
-      }
     }
   }
 
@@ -32,9 +30,6 @@ export class CourseCreateEditComponent {
   set creationDateComponent(date: CourseDateComponent) {
     if (date) {
       this.creationDate = date;
-      if (this.course) {
-        this.creationDate.creationDate = this.course.creationDate;
-      }
     }
   }
 
@@ -44,13 +39,22 @@ export class CourseCreateEditComponent {
   constructor(private readonly courseService: CourseService,
     private readonly router: Router,
     activatedRoute: ActivatedRoute) {
-    activatedRoute.params.subscribe(params => {
-      this.course = this.courseService.getById(params['id']);
-      if (this.course) {
-        this.title = this.course.title;
-        this.description = this.course.description;
-      }
-    });
+    activatedRoute.params.pipe(filter(params => params['id'] && params['id'] !== 'new'),
+      switchMap(params =>
+        this.courseService.getById(params['id'])
+      )).subscribe(course => {
+        this.course = course;
+        if (this.course) {
+          this.title = this.course.name;
+          this.description = this.course.description;
+          this.setChildComponents();
+        }
+      });
+  }
+
+  private setChildComponents() {
+    this.creationDate.creationDate = this.course.date;
+    this.duration.duration = this.course.length;
   }
 
   cancel() {
@@ -60,12 +64,13 @@ export class CourseCreateEditComponent {
   save() {
     const isEditing = Boolean(this.course);
     this.course = {
-      id: isEditing ? this.course.id : Date.now().toString(),
-      title: this.title,
+      id: isEditing ? this.course.id : Date.now().valueOf(),
+      name: this.title,
       description: this.description,
-      duration: this.duration.duration,
-      creationDate: new Date(this.creationDate.creationDate),
-      topRated: isEditing ? this.course.topRated : undefined,
+      length: this.duration.duration,
+      date: this.creationDate.creationDate,
+      authors: isEditing ? this.course.authors : [],
+      isTopRated: isEditing ? this.course.isTopRated : false,
     };
 
     isEditing ? this.courseService.update(this.course) : this.courseService.create(this.course);

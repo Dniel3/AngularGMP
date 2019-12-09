@@ -1,21 +1,25 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { CourseService } from './course.service';
-import { Course } from '../core/course-model';
+import { Course } from '../core/model/course-model';
 
 describe('CourseService', () => {
   let courseService: CourseService;
+  let httpMock: HttpTestingController;
+  const coursesUrl = 'http://localhost:3004/courses';
   const newCourse: Course = {
-    id: 'foo',
-    creationDate: new Date(),
+    id: 1,
+    date: new Date().toISOString(),
     description: 'foobarzfoo',
-    duration: 111,
-    title: 'new',
+    length: 111,
+    name: 'new',
   };
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({imports: [HttpClientTestingModule]});
     courseService = TestBed.get(CourseService);
+    httpMock = TestBed.get(HttpTestingController);
    }
   );
 
@@ -24,28 +28,55 @@ describe('CourseService', () => {
   });
 
   it('should return courses', () => {
-    expect(courseService.get()).toBeDefined();
-  })
+    const fakeCourses = [
+      {
+        id: 2,
+        name: 'foo',
+        length: 9,
+        description: 'barz',
+        date: 'now',
+      },
+      newCourse,
+    ];
+
+    courseService.get(0, 5, '').subscribe(courses => {
+      expect(courses).toBe(fakeCourses);
+    });
+
+    const req = httpMock.expectOne(coursesUrl);
+    req.flush(fakeCourses);
+  });
 
   it('should create course', () => {
-    courseService.create(newCourse);
+    courseService.create(newCourse).subscribe(course => {
+      expect(course).toBe(newCourse);
+    });
 
-    expect(courseService.get().find(course => course.id = newCourse.id)).toBeDefined();
-  })
+    const req = httpMock.expectOne(coursesUrl);
+    req.flush(newCourse);
+  });
 
   it('should get course by id', () => {
-    courseService.create(newCourse);
+    courseService.getById(newCourse.id).subscribe( course => {
+      expect(course).toBe(newCourse);
+    })
 
-    expect(courseService.getById(newCourse.id)).toBeDefined();
-  })
+    const req = httpMock.expectOne(`${coursesUrl}/${newCourse.id}`);
+    req.flush(newCourse);
+  });
 
   it('should update course', () => {
-    courseService.create(newCourse);
-    newCourse.topRated = true;
+    newCourse.isTopRated = true;
 
-    courseService.update(newCourse)
+    courseService.update(newCourse).subscribe(course => {
+      expect(course).toBe(newCourse);
+    });
 
-    expect(courseService.get().find(course => course.id = newCourse.id).topRated).toBe(true);
-  })
+    const req = httpMock.expectOne(coursesUrl);
+    req.flush(newCourse);
+  });
 
+  afterEach(() => {
+    httpMock.verify();
+  });
 });

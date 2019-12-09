@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseListItemComponent } from './course-list-item.component';
-import { Course } from '../../core/course-model';
+import { Course } from '../../core/model/course-model';
 import { Component } from '@angular/core';
 import { DurationPipe } from './duration.pipe';
 import { By } from '@angular/platform-browser';
@@ -14,11 +14,11 @@ import { By } from '@angular/platform-browser';
 })
 class ItemHost {
   course: Course = {
-    id: '1',
-    creationDate: new Date('Oct 2 2019 13:11:19'),
-    duration: 90,
+    id: 1,
+    date: new Date('Oct 2 2019 13:11:19').toISOString(),
+    length: 90,
     description: 'fake description',
-    title: 'fake title',
+    name: 'fake title',
   };
 
   remove(id: string) {
@@ -53,7 +53,7 @@ describe('CourseListItemComponentHosted', () => {
   });
 
   it('should render course information', () => {
-    expect(itemComponent.querySelector('.title').textContent).toBe(component.course.title.toUpperCase());
+    expect(itemComponent.querySelector('.title').textContent).toBe(component.course.name.toUpperCase());
     expect(itemComponent.querySelector('#course-duration').textContent).toBe('1 h 30 min');
     expect(itemComponent.querySelector('#course-date').textContent).toBe('Oct 2, 2019');
     expect(itemComponent.querySelector('#course-description').textContent).toBe(component.course.description);
@@ -81,11 +81,11 @@ describe('CourseListItemComponent', () => {
   let fixture: ComponentFixture<CourseListItemComponent>;
   let nativeElement: HTMLElement;
   const fakeCourse: Course = {
-    id: '1',
-    creationDate: new Date('Oct 2 2019'),
-    duration: 90,
+    id: 1,
+    date: new Date('Oct 2 2019').toISOString(),
+    length: 90,
     description: 'fake description',
-    title: 'fake title',
+    name: 'fake title',
   };
 
   beforeEach(async(() => {
@@ -108,15 +108,15 @@ describe('CourseListItemComponent', () => {
   });
 
   it('should render course information', () => {
-    expect(nativeElement.querySelector('.title').textContent).toBe(fakeCourse.title.toUpperCase());
+    expect(nativeElement.querySelector('.title').textContent).toBe(fakeCourse.name.toUpperCase());
     expect(nativeElement.querySelector('#course-duration').textContent).toBe('1 h 30 min');
     expect(nativeElement.querySelector('#course-date').textContent).toBe('Oct 2, 2019');
     expect(nativeElement.querySelector('#course-description').textContent).toBe(fakeCourse.description);
   });
 
   it('should emit id when clicking delete button', () => {
-    let expectedId: string;
-    component.remove.subscribe((id: string) => { expectedId = id; });
+    let expectedId: number;
+    component.remove.subscribe((id: number) => { expectedId = id; });
 
     nativeElement.querySelector<HTMLButtonElement>('#delete-item').click();
 
@@ -124,8 +124,8 @@ describe('CourseListItemComponent', () => {
   });
 
   it('should emit id when clicking edit button', () => {
-    let expectedId: string;
-    component.edit.subscribe((id: string) => { expectedId = id; });
+    let expectedId: number;
+    component.edit.subscribe((id: number) => { expectedId = id; });
 
     nativeElement.querySelector<HTMLButtonElement>('#edit-item').click();
 
@@ -133,7 +133,7 @@ describe('CourseListItemComponent', () => {
   });
 
   it('should render and change color for top rated course', () => {
-    component.course.topRated = true;
+    component.course.isTopRated = true;
 
     fixture.detectChanges();
 

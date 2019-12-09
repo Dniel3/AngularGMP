@@ -8,11 +8,14 @@ import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginModule } from './login/login.module';
 import { AdminModule } from './admin/admin.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [ AppComponent ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AdminModule,
     AppRoutingModule,
     CoreModule,
@@ -21,7 +24,11 @@ import { AdminModule } from './admin/admin.module';
     LoginModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

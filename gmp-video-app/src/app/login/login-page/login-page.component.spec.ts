@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of as observableOf } from 'rxjs';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -12,7 +13,7 @@ describe('LoginPageComponent', () => {
   let fakeUserService: jasmine.SpyObj<UserService>;
 
   beforeEach(async(() => {
-    fakeUserService = jasmine.createSpyObj('UserService', ['login']);
+    fakeUserService = jasmine.createSpyObj('UserService', ['login', 'get']);
     TestBed.configureTestingModule({
       declarations: [ LoginPageComponent ],
       imports: [FormsModule, RouterTestingModule],
@@ -24,6 +25,7 @@ describe('LoginPageComponent', () => {
     fixture = TestBed.createComponent(LoginPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    fakeUserService.login.and.returnValue(observableOf({token: 'koshka'}));
   });
 
   it('should create', () => {

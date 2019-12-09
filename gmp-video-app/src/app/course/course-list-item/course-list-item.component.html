@@ -1,18 +1,18 @@
-<div [class.top-rated]="course.topRated" class="container">
+<div [class.top-rated]="course.isTopRated" class="container">
   <div class="course-container">
     <div class="course">
       <div>
-        <span class="title">{{course.title | uppercase}}</span>
-        <span *ngIf="course.topRated" id="top-rated">-Top-</span>
+        <span class="title">{{course.name | uppercase}}</span>
+        <span *ngIf="course.isTopRated" id="top-rated">-Top-</span>
       </div>
       <div class="time-container">
         <div>
           <i class="far fa-clock"></i>
-          <span id="course-duration">{{course.duration | durationFormat}}</span>
+          <span id="course-duration">{{course.length | durationFormat}}</span>
         </div>
         <div>
           <i class="far fa-calendar-alt"></i>
-          <span id="course-date">{{course.creationDate | date: 'mediumDate'}}</span>
+          <span id="course-date">{{course.date | date: 'mediumDate'}}</span>
         </div>
       </div>
     </div>

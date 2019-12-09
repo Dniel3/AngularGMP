@@ -6,15 +6,16 @@ import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 export class NewReleaseDirective {
 
   @Input('gmpNewRelease')
-  set courseDate(creationDate: Date) {
+  set courseDate(creationDate: string) {
     let borderColor = null;
+    const courseDate = new Date(creationDate);
     const currentDate = new Date();
     const freshThreshold = new Date();
     freshThreshold.setDate(freshThreshold.getDate() - 14);
-    if(creationDate < currentDate && creationDate >= freshThreshold) {
+    if(courseDate < currentDate && courseDate >= freshThreshold) {
       borderColor = '5px solid green';
     }
-    if(creationDate > currentDate) {
+    if(courseDate > currentDate) {
       borderColor = '5px solid blue';
     }
 

@@ -1,29 +1,29 @@
 import { OrderByPipe } from './order-by.pipe';
-import { Course } from '../../core/course-model';
+import { Course } from '../../core/model/course-model';
 
 describe('OrderByPipe', () => {
 
   const fakeCourseList: Course[] = [   
     {
-      id: 'newest',
-      title: 'Dative',
-      creationDate: new Date(),
-      duration: 120,
+      id: 11,
+      name: 'Dative',
+      date: new Date().toISOString(),
+      length: 120,
       description: 'Dative case.',
-      topRated: true,
+      isTopRated: true,
     },
     {
-      id: '22',
-      title: 'Genitive',
-      creationDate: new Date('Oct 25 2019 13:11:19'),
-      duration: 100,
+      id: 22,
+      name: 'Genitive',
+      date: new Date('Oct 25 2019 13:11:19').toISOString(),
+      length: 100,
       description: 'Genitive case.',
     },
     {
-      id: 'oldest',
-      title: 'Accusative',
-      creationDate: new Date('Oct 2 2019 13:11:19'),
-      duration: 90,
+      id: 33,
+      name: 'Accusative',
+      date: new Date('Oct 2 2019 13:11:19').toISOString(),
+      length: 90,
       description: 'Accusative case.',
     },];
 
@@ -37,7 +37,7 @@ describe('OrderByPipe', () => {
 
     const sortedCourses = pipe.transform(fakeCourseList, 'ASC');
 
-    expect(sortedCourses[0].id).toContain('oldest');
+    expect(sortedCourses[0].id).toBe(33);
   });
 
   it('transforms unsorted curses to sorted DESC', () => {
@@ -45,6 +45,6 @@ describe('OrderByPipe', () => {
 
     const sortedCourses = pipe.transform(fakeCourseList);
 
-    expect(sortedCourses[0].id).toContain('newest');
+    expect(sortedCourses[0].id).toBe(11);
   });
 });

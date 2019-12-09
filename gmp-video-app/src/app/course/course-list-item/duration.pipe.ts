@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Course } from '../../core/course-model';
+import { Course } from '../../core/model/course-model';
 
 @Pipe({
   name: 'durationFormat',

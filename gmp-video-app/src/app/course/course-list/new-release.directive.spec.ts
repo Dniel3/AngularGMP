@@ -2,23 +2,23 @@ import { NewReleaseDirective } from "./new-release.directive";
 import { ElementRef, Component, Renderer2, Type } from '@angular/core';
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
 import { CourseListItemComponent } from '../course-list-item/course-list-item.component';
-import { Course } from '../../core/course-model';
+import { Course } from '../../core/model/course-model';
 import { DurationPipe } from '../course-list-item/duration.pipe';
 import { By } from '@angular/platform-browser';
 
 @Component({
   template: `
-     <gmp-course-list-item [course]="course" [gmpNewRelease]="course.creationDate" (remove)="remove($event)">
+     <gmp-course-list-item [course]="course" [gmpNewRelease]="course.date" (remove)="remove($event)">
      </gmp-course-list-item>
   `,
 })
 class ItemHost {
   course: Course = {
-    id: '1',
-    creationDate: new Date(),
-    duration: 90,
+    id: 1,
+    date: new Date().toISOString(),
+    length: 90,
     description: 'fake description',
-    title: 'fake title',
+    name: 'fake title',
   };
 }
 
@@ -56,7 +56,7 @@ describe('NewReleaseDirective', () => {
     const course = fixture.debugElement.query(By.directive(NewReleaseDirective));
     const greaterDate = new Date();
     greaterDate.setDate(greaterDate.getDate() + 14);
-    component.course.creationDate = greaterDate;
+    component.course.date = greaterDate.toISOString();
 
     fixture.detectChanges();
 
@@ -65,7 +65,7 @@ describe('NewReleaseDirective', () => {
 
   it('should render non styled course', () => {
     const course = fixture.debugElement.query(By.directive(NewReleaseDirective));
-    component.course.creationDate = new Date('Oct 1 2000 11:00:00');
+    component.course.date = new Date('Oct 1 2000 11:00:00').toISOString();
 
     fixture.detectChanges();
 

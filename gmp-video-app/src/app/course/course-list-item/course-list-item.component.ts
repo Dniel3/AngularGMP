@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Course } from '../../core/course-model';
+import { Course } from '../../core/model/course-model';
 
 @Component({
   selector: 'gmp-course-list-item',
@@ -9,8 +9,8 @@ import { Course } from '../../core/course-model';
 })
 export class CourseListItemComponent {
   @Input() course: Course;
-  @Output() remove = new EventEmitter<string>();
-  @Output() edit = new EventEmitter<string>();
+  @Output() remove = new EventEmitter<number>();
+  @Output() edit = new EventEmitter<number>();
 
   delete() {
     this.remove.emit(this.course.id);

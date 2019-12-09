@@ -9,7 +9,7 @@ describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(async(() => {
-    fakeUserService = jasmine.createSpyObj('UserService', ['logout', 'isLoggedIn', 'get']);
+    fakeUserService = jasmine.createSpyObj('UserService', ['logout', 'isLoggedIn', 'get', 'getUser']);
     TestBed.configureTestingModule({
       imports: [
         CoreModule,

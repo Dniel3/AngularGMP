@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { User } from '../user-model';
+import { User } from '../model/user-model';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'gmp-header',
@@ -10,12 +11,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
 
-  user?: User
-
-  constructor(private readonly userService: UserService,
-    private readonly router: Router) {
-    this.user = userService.get();
-  }
+  constructor(readonly userService: UserService,
+    private readonly router: Router) {  }
 
   isAuth(): boolean {
     return this.userService.isLoggedIn();
@@ -24,6 +21,6 @@ export class HeaderComponent {
   logOut() {
     this.userService.logout();
     this.router.navigate(['login']);
-    console.log('log-out: ', this.user.name);
+    console.log('log-out ');
   }
 }
