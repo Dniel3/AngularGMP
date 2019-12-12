@@ -73,7 +73,7 @@ export class CourseCreateEditComponent {
       isTopRated: isEditing ? this.course.isTopRated : false,
     };
 
-    isEditing ? this.courseService.update(this.course) : this.courseService.create(this.course);
+    isEditing ? this.courseService.update(this.course).subscribe(console.log) : this.courseService.create(this.course).subscribe(console.log);
 
     this.router.navigate(['courses']);
   }
