@@ -1,0 +1,1 @@
+export const COURSES_SERVER = 'http://localhost:3004';

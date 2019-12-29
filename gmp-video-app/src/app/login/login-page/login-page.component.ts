@@ -12,15 +12,9 @@ export class LoginPageComponent {
   email = 'Morales';
   password = 'id';
 
-  constructor(private readonly userService: UserService, private readonly router: Router) { }
+  constructor(private readonly userService: UserService) { }
 
   login() {
-    this.userService.login({login: this.email, password: this.password})
-    .subscribe((response:Token) => {
-      localStorage.setItem('token', response.token);
-      this.userService.get();
-      this.router.navigate(['courses']);
-      console.log('logged in successfully');
-    });
+    this.userService.login({login: this.email, password: this.password});
   }
 }
