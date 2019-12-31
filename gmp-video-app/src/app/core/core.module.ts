@@ -6,7 +6,9 @@ import { BreadcrumComponent } from './breadcrum/breadcrum.component';
 import { LogoComponent } from './logo/logo.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { RouterModule } from '@angular/router';
-
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { OverlayModule } from '@angular/cdk/overlay'
 
 
 @NgModule({
@@ -16,11 +18,15 @@ import { RouterModule } from '@angular/router';
     BreadcrumComponent,
     LogoComponent,
     NotFoundPageComponent,
+    LoadingSpinnerComponent,
+
   ],
   imports: [
     CommonModule, 
     RouterModule,
+    MatProgressSpinnerModule,
+    OverlayModule,
   ],
-  exports: [HeaderComponent, FooterComponent, BreadcrumComponent],
+  exports: [HeaderComponent, FooterComponent, BreadcrumComponent, LoadingSpinnerComponent],
 })
 export class CoreModule { }

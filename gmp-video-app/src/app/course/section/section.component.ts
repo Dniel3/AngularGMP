@@ -15,7 +15,9 @@ export class SectionComponent {
 
   searchCourse() {
     console.log(this.course);
-    this.search.emit(this.course);
+    if(this.course.length === 3 || this.course === '') {
+      this.search.emit(this.course);
+    }
   }
 
   add() {

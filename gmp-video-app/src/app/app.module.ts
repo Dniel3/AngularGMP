@@ -10,6 +10,7 @@ import { LoginModule } from './login/login.module';
 import { AdminModule } from './admin/admin.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor';
+import { LoadingInterceptor } from './services/interceptors/loading-interceptor';
 
 @NgModule({
   declarations: [ AppComponent ],
@@ -24,9 +25,15 @@ import { AuthInterceptor } from './services/interceptors/auth-interceptor';
     LoginModule,
     AppRoutingModule,
   ],
-  providers: [{
+  providers: [
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]
