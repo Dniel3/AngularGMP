@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CourseService } from '../../services/course.service';
 import { Course } from '../../core/model/course-model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FilterCoursePipe } from './filter-course.pipe';
 import { Router } from '@angular/router';
-import { switchMap, map, filter, debounce, debounceTime, startWith } from 'rxjs/operators';
+import { switchMap, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'gmp-course-list',
@@ -35,7 +35,9 @@ export class CourseListComponent {
   constructor(private readonly courseService: CourseService,
     private readonly filterPipe: FilterCoursePipe,
     private readonly router: Router) {
-    this.courses$ = this.newSearch$.pipe(debounceTime(300),
+    this.courses$ = this.newSearch$.pipe(filter(req => req.textFragement.length > 3 || req.textFragement === ''),
+      debounceTime(300),
+      distinctUntilChanged(),
       switchMap(
         (request) =>
           this.courseService.get(request.start, request.count, request.textFragement)

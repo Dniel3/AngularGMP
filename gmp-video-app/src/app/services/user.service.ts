@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../core/model/user-model';
 import { Login, Token } from '../core/model/login-model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
 import { COURSES_SERVER } from '../core/constants/config';
 import { shareReplay, filter, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -11,30 +11,27 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UserService {
-  private user$: Observable<User>;
+  readonly user$: Observable<User|undefined>;
 
-  private readonly token$ = new BehaviorSubject(null);
+  readonly isAuth$ = new BehaviorSubject(localStorage.getItem('token') !== null);
   
   constructor(private readonly http: HttpClient, private readonly router: Router) {
-    this.user$ =  this.token$.pipe( switchMap(token => this.http.post<User>(
+    this.user$ =  this.isAuth$.pipe(switchMap(isAuth => isAuth ? this.http.post<User>(
       `${COURSES_SERVER}/auth/userinfo`,
-      {token: localStorage.getItem('token')}).pipe(shareReplay(1))))
+      {token: localStorage.getItem('token')}).pipe(shareReplay(1)) : observableOf(undefined)))
    }
-
-  getUser(): Observable<User> {
-    return this.user$;
-  }
 
   login(login: Login) {
     this.http.post<Token>(`${COURSES_SERVER}/auth/login`, login).subscribe((response:Token) => {
       localStorage.setItem('token', response.token);
-      this.token$.next(null);
+      this.isAuth$.next(true);
       this.router.navigate(['courses']);
       console.log('logged in successfully');
     });
   }
 
   logout() {
+    this.isAuth$.next(false);
     localStorage.removeItem('token');
   }
 
