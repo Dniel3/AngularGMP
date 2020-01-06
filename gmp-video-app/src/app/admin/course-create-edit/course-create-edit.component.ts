@@ -6,6 +6,9 @@ import { Course } from '../../core/model/course-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../../services/course.service';
 import { switchMap, filter } from 'rxjs/operators';
+import { GmpState } from '../../state/state';
+import { Store } from '@ngrx/store';
+import { update, create } from '../../state/course/course.actions';
 
 @Component({
   selector: 'gmp-course-create-edit',
@@ -37,6 +40,7 @@ export class CourseCreateEditComponent {
   private authors: CourseAuthorComponent | undefined
 
   constructor(private readonly courseService: CourseService,
+    private readonly store: Store<GmpState>,
     private readonly router: Router,
     activatedRoute: ActivatedRoute) {
     activatedRoute.params.pipe(filter(params => params['id'] && params['id'] !== 'new'),
@@ -73,7 +77,7 @@ export class CourseCreateEditComponent {
       isTopRated: isEditing ? this.course.isTopRated : false,
     };
 
-    isEditing ? this.courseService.update(this.course).subscribe(console.log) : this.courseService.create(this.course).subscribe(console.log);
+    isEditing ? this.store.dispatch(update) : this.store.dispatch(create);
 
     this.router.navigate(['courses']);
   }

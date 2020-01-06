@@ -11,6 +11,10 @@ import { AdminModule } from './admin/admin.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor';
 import { LoadingInterceptor } from './services/interceptors/loading-interceptor';
+import { StoreModule } from '@ngrx/store';
+import { CourseReducer } from './state/course/course-reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseEffects } from './state/course/course-effects';
 
 @NgModule({
   declarations: [ AppComponent ],
@@ -24,6 +28,8 @@ import { LoadingInterceptor } from './services/interceptors/loading-interceptor'
     BrowserAnimationsModule,
     LoginModule,
     AppRoutingModule,
+    StoreModule.forRoot({courses: CourseReducer}),
+    EffectsModule.forRoot([CourseEffects]),
   ],
   providers: [
     {

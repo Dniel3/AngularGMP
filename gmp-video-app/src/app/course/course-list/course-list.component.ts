@@ -5,6 +5,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { FilterCoursePipe } from './filter-course.pipe';
 import { Router } from '@angular/router';
 import { switchMap, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { GmpState } from '../../state/state';
+import { Store, select } from '@ngrx/store';
+import { list, remove } from '../../state/course/course.actions';
 
 @Component({
   selector: 'gmp-course-list',
@@ -21,7 +24,7 @@ export class CourseListComponent {
 
   private readonly newSearch$ = new BehaviorSubject(this.getCoursesRequest);
 
-  readonly courses$: Observable<Course[]>;
+  readonly courseState$: Observable<Course[]>;
 
   @Input()
   set filter(filter: string) {
@@ -32,22 +35,23 @@ export class CourseListComponent {
     });
   }
 
-  constructor(private readonly courseService: CourseService,
+  constructor(private readonly store: Store<GmpState>,
+    private readonly courseService: CourseService,
     private readonly filterPipe: FilterCoursePipe,
     private readonly router: Router) {
-    this.courses$ = this.newSearch$.pipe(filter(req => req.textFragement.length > 3 || req.textFragement === ''),
+    this.courseState$ = this.store.pipe(select('courses'));
+    
+    this.newSearch$.pipe(filter(req => req.textFragement.length > 3 || req.textFragement === ''),
       debounceTime(300),
-      distinctUntilChanged(),
-      switchMap(
+      distinctUntilChanged()).subscribe(
         (request) =>
-          this.courseService.get(request.start, request.count, request.textFragement)
-      )
-    );
+          this.store.dispatch(list({start: request.start, count: request.count, textFragment: request.textFragement}))
+      );
   }
 
   remove(id: number) {
     if (window.confirm("Do you really want to delete this course?")) {
-      this.courseService.delete(id).pipe(map(() => this.getCoursesRequest)).subscribe(this.newSearch$);
+      this.store.dispatch(remove({id}));
     }
   }
 
