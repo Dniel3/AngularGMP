@@ -4,7 +4,7 @@ import { Course } from '../../core/model/course-model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FilterCoursePipe } from './filter-course.pipe';
 import { Router } from '@angular/router';
-import { switchMap, map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { GmpState } from '../../state/state';
 import { Store, select } from '@ngrx/store';
 import { list, remove } from '../../state/course/course.actions';

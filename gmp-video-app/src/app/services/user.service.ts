@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { User } from '../core/model/user-model';
-import { Login, Token } from '../core/model/login-model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, of as observableOf } from 'rxjs';
-import { COURSES_SERVER } from '../core/constants/config';
-import { shareReplay, filter, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { GmpState } from '../state/state';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +15,8 @@ export class UserService {
 
   readonly isAuth$ = new BehaviorSubject(localStorage.getItem('token') !== null);
   
-  constructor(private readonly http: HttpClient, private readonly router: Router) {
-    this.user$ =  this.isAuth$.pipe(switchMap(isAuth => isAuth ? this.http.post<User>(
-      `${COURSES_SERVER}/auth/userinfo`,
-      {token: localStorage.getItem('token')}).pipe(shareReplay(1)) : observableOf(undefined)))
-   }
-
-  login(login: Login) {
-    this.http.post<Token>(`${COURSES_SERVER}/auth/login`, login).subscribe((response:Token) => {
-      localStorage.setItem('token', response.token);
-      this.isAuth$.next(true);
-      this.router.navigate(['courses']);
-      console.log('logged in successfully');
-    });
+  constructor(private readonly http: HttpClient, private readonly router: Router, store: Store<GmpState>) {
+    this.user$ = store.pipe(map(state => state.courses.user));
   }
 
   logout() {

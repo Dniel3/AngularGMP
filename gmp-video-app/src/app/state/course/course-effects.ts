@@ -7,12 +7,16 @@ import { HttpClient } from '@angular/common/http';
 import { COURSES_SERVER } from '../../core/constants/config';
 import { list, courses, remove, create, update } from './course.actions';
 import { Course } from '../../core/model/course-model';
+import { Login, Token } from '../../core/model/login-model';
+import { User } from '../../core/model/user-model';
+import { currentUser, user, login } from '../user/user.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CourseEffects {
   private readonly coursesUrl = `${COURSES_SERVER}/courses`;
 
-  constructor(private readonly actions$: Actions, private readonly http: HttpClient) { }    
+  constructor(private readonly actions$: Actions, private readonly http: HttpClient, private readonly router: Router) { }    
 
   readonly listCourses$: Observable<Action> = createEffect(() =>
       this.actions$.pipe(
@@ -27,7 +31,6 @@ export class CourseEffects {
             return this.http.get<Course[]>(this.coursesUrl, { params });
           }),
           map(response => {
-              console.log(response);
               return courses({courses: response});})
         )
       );
@@ -64,4 +67,25 @@ export class CourseEffects {
             'textFragment': '',
         }))
     ));
+
+  readonly login$: Observable<Action> = createEffect(() => 
+    this.actions$.pipe(
+        ofType(login),
+        switchMap(action => this.http.post<Token>(`${COURSES_SERVER}/auth/login`, action.login)),
+        map(response => {       
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['courses']);
+          return user(response);
+        }),
+    )
+  );
+
+  readonly user$: Observable<Action> = createEffect(() => 
+    this.actions$.pipe(
+        ofType(user),
+        switchMap(action => this.http.post<User>(`${COURSES_SERVER}/auth/userinfo`,
+            {token: action.token})),
+        map(user => currentUser({user})),
+    )
+  );
 }

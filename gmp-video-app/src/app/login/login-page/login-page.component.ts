@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
-import { Token } from '../../core/model/login-model';
+import { GmpState } from 'src/app/state/state';
+import { Store } from '@ngrx/store';
+import { login } from 'src/app/state/user/user.actions';
 
 @Component({
   selector: 'gmp-login-page',
@@ -12,9 +13,9 @@ export class LoginPageComponent {
   email = 'Morales';
   password = 'id';
 
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly store: Store<GmpState>, private readonly userService: UserService) { }
 
   login() {
-    this.userService.login({login: this.email, password: this.password});
+    this.store.dispatch(login({login: { login:this.email, password: this.password }}));
   }
 }
