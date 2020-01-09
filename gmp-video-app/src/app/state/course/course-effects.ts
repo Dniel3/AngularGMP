@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, of as observableOf, observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { COURSES_SERVER } from '../../core/constants/config';
@@ -57,24 +57,26 @@ export class CourseEffects {
         }))
       ));
 
-    readonly removeCourse$: Observable<Action> = createEffect(() => 
-        this.actions$.pipe(
-        ofType(remove),
-        switchMap(action => this.http.delete<Course>(`${this.coursesUrl}/${action.id}`)),
-        map(() => list({
-            'start': 0,
-            'count': 5,
-            'textFragment': '',
-        }))
-    ));
+  readonly removeCourse$: Observable<Action> = createEffect(() => 
+      this.actions$.pipe(
+      ofType(remove),
+      switchMap(action => this.http.delete<Course>(`${this.coursesUrl}/${action.id}`)),
+      map(() => list({
+          'start': 0,
+          'count': 5,
+          'textFragment': '',
+      }))
+  ));
 
   readonly login$: Observable<Action> = createEffect(() => 
     this.actions$.pipe(
         ofType(login),
-        switchMap(action => this.http.post<Token>(`${COURSES_SERVER}/auth/login`, action.login)),
+        switchMap(action => localStorage.getItem('token') ? 
+              observableOf({token: localStorage.getItem('token')}) : 
+              this.http.post<Token>(`${COURSES_SERVER}/auth/login`, action.login)),
         map(response => {       
-          localStorage.setItem('token', response.token);
           this.router.navigate(['courses']);
+          localStorage.setItem('token', response.token);
           return user(response);
         }),
     )
@@ -83,9 +85,12 @@ export class CourseEffects {
   readonly user$: Observable<Action> = createEffect(() => 
     this.actions$.pipe(
         ofType(user),
-        switchMap(action => this.http.post<User>(`${COURSES_SERVER}/auth/userinfo`,
-            {token: action.token})),
-        map(user => currentUser({user})),
+        switchMap(action => localStorage.getItem('user') ?
+              observableOf(JSON.parse(localStorage.getItem('user'))) :
+              this.http.post<User>(`${COURSES_SERVER}/auth/userinfo`, {token: action.token})),
+        map(user => {
+          localStorage.setItem('user', JSON.stringify(user));
+          return currentUser({user});}),
     )
   );
 }

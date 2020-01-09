@@ -3,7 +3,7 @@
   <div class="header-container">
     <gmp-header></gmp-header>
   </div>
-  <div *ngIf="isAuth()" class="breadcrum-container">
+  <div *ngIf="userService.isAuth$ | async" class="breadcrum-container">
     <gmp-breadcrum></gmp-breadcrum>
   </div>
   <div class="page-container">

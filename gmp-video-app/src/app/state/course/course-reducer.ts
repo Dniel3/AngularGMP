@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { initializeState, GmpState } from '../state';
 import { list, courses } from './course.actions';
-import { login, user, currentUser, token } from '../user/user.actions';
+import { user, currentUser, token } from '../user/user.actions';
 
 const reducer =  createReducer(initializeState(),
     on(list, state => state),

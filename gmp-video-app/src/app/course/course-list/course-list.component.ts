@@ -8,6 +8,7 @@ import { filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { GmpState } from '../../state/state';
 import { Store, select } from '@ngrx/store';
 import { list, remove } from '../../state/course/course.actions';
+import { coursesSelector } from 'src/app/state/course/course-selectors';
 
 @Component({
   selector: 'gmp-course-list',
@@ -39,8 +40,8 @@ export class CourseListComponent {
     private readonly courseService: CourseService,
     private readonly filterPipe: FilterCoursePipe,
     private readonly router: Router) {
-    this.courseState$ = this.store.pipe(select('courses'));
-    
+    this.courseState$ = this.store.pipe(select(coursesSelector));
+    this.courseState$.subscribe(console.log);
     this.newSearch$.pipe(filter(req => req.textFragement.length > 3 || req.textFragement === ''),
       debounceTime(300),
       distinctUntilChanged()).subscribe(

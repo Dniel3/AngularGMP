@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from './services/user.service';
+import { GmpState } from './state/state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,5 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   title = 'gmp-video-app';
 
-  constructor(private readonly userService: UserService) { }
-
-  isAuth(): boolean {
-    return this.userService.isLoggedIn();
-  }
+  constructor(readonly userService: UserService) { }
 }
