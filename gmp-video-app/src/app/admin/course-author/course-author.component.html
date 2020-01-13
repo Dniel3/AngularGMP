@@ -1,1 +1,16 @@
-<input [(ngModel)]="authors" type="text" placeholder="Enter author(s)">
+<mat-form-field>
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let author of authors" (removed)="remove(author)">
+      {{author.name}}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input #authorInput [formControl]="authInput" [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputAddOnBlur]="addOnBlur">
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let author of filteredAuthors$ | async" [value]="author">
+      {{author.name}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

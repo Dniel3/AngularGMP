@@ -1,11 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
-import { CourseDateComponent } from '../course-date/course-date.component';
-import { CourseDurationComponent } from '../course-duration/course-duration.component';
-import { CourseAuthorComponent } from '../course-author/course-author.component';
+import { Component } from '@angular/core';
 import { Course } from '../../core/model/course-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../../services/course.service';
 import { switchMap, filter } from 'rxjs/operators';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthorsService } from '../../services/authors.service';
+import { Observable } from 'rxjs';
+import { Author } from '../../core/model/author-model';
 
 @Component({
   selector: 'gmp-course-create-edit',
@@ -16,45 +17,35 @@ export class CourseCreateEditComponent {
   title = '';
   course: Course | undefined = undefined;
   description = '';
-  private duration: CourseDurationComponent | undefined;
-  private creationDate: CourseDateComponent | undefined;
+  readonly authors$: Observable<Author[]>;
 
-  @ViewChild(CourseDurationComponent, { static: false })
-  set durationComponent(duration: CourseDurationComponent) {
-    if (duration) {
-      this.duration = duration;
-    }
-  }
-
-  @ViewChild(CourseDateComponent, { static: false })
-  set creationDateComponent(date: CourseDateComponent) {
-    if (date) {
-      this.creationDate = date;
-    }
-  }
-
-  @ViewChild(CourseAuthorComponent, { static: false })
-  private authors: CourseAuthorComponent | undefined
+  form = new FormGroup({
+    title: new FormControl('', [Validators.maxLength(50), Validators.required]),
+    description: new FormControl('', [Validators.maxLength(500), Validators.required]),
+    date: new FormControl('', [Validators.pattern('([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$'), Validators.required]),
+    duration: new FormControl(0, [Validators.required]),
+    author: new FormControl([], [Validators.required, Validators.minLength(1)])
+  });
 
   constructor(private readonly courseService: CourseService,
+    private readonly authorService: AuthorsService,
     private readonly router: Router,
     activatedRoute: ActivatedRoute) {
+    this.authors$ = this.authorService.getAuthors();
+
     activatedRoute.params.pipe(filter(params => params['id'] && params['id'] !== 'new'),
       switchMap(params =>
         this.courseService.getById(params['id'])
       )).subscribe(course => {
         this.course = course;
         if (this.course) {
-          this.title = this.course.name;
-          this.description = this.course.description;
-          this.setChildComponents();
+          this.form.controls['title'].setValue(this.course.name);
+          this.form.controls['description'].setValue(this.course.description);
+          this.form.controls['date'].setValue(this.course.date);
+          this.form.controls['duration'].setValue(this.course.length); 
+          this.form.controls['author'].setValue(this.course.authors);
         }
       });
-  }
-
-  private setChildComponents() {
-    this.creationDate.creationDate = this.course.date;
-    this.duration.duration = this.course.length;
   }
 
   cancel() {
@@ -65,11 +56,11 @@ export class CourseCreateEditComponent {
     const isEditing = Boolean(this.course);
     this.course = {
       id: isEditing ? this.course.id : Date.now().valueOf(),
-      name: this.title,
-      description: this.description,
-      length: this.duration.duration,
-      date: this.creationDate.creationDate,
-      authors: isEditing ? this.course.authors : [],
+      name: this.form.controls['title'].value,
+      description: this.form.controls['description'].value,
+      length: this.form.controls['duration'].value,
+      date: this.form.controls['date'].value,
+      authors: this.form.controls['author'].value,
       isTopRated: isEditing ? this.course.isTopRated : false,
     };
 

@@ -4,9 +4,12 @@ import { CourseDurationComponent } from './course-duration/course-duration.compo
 import { CourseDateComponent } from './course-date/course-date.component';
 import { CourseAuthorComponent } from './course-author/course-author.component';
 import { CourseCreateEditComponent } from './course-create-edit/course-create-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CourseModule } from '../course/course.module';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -15,7 +18,13 @@ import { CourseModule } from '../course/course.module';
     CommonModule,
     FormsModule,
     CourseModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatSelectModule,
+    MatIconModule,
   ],
-  exports: [CourseCreateEditComponent]
+  exports: [CourseCreateEditComponent],
+  entryComponents: [CourseAuthorComponent]
 })
 export class AdminModule { }

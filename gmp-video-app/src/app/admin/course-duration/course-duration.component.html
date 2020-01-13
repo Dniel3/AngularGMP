@@ -1,2 +1,2 @@
-<input [(ngModel)]="duration" type="number" placeholder="minutes">
+<input [disabled]="disabled" [(ngModel)]="value" type="number" placeholder="minutes">
 <span *ngIf="duration">{{duration | durationFormat}}</span>
