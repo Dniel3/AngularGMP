@@ -41,10 +41,8 @@ export class CourseListComponent {
     private readonly filterPipe: FilterCoursePipe,
     private readonly router: Router) {
     this.courseState$ = this.store.pipe(select(coursesSelector));
-    this.courseState$.subscribe(console.log);
     this.newSearch$.pipe(filter(req => req.textFragement.length > 3 || req.textFragement === ''),
-      debounceTime(300),
-      distinctUntilChanged()).subscribe(
+      debounceTime(300)).subscribe(
         (request) =>
           this.store.dispatch(list({start: request.start, count: request.count, textFragment: request.textFragement}))
       );

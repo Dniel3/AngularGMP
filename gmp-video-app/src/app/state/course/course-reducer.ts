@@ -6,7 +6,7 @@ import { user, currentUser, token } from '../user/user.actions';
 const reducer =  createReducer(initializeState(),
     on(list, state => state),
     on(courses, (state: GmpState, { courses }) => {
-        return { ...state, courses };
+        return { courses: courses, token: state.token, user: state.user };
       }),
     on(user, (state: GmpState, { token }) => {
       return { ...state, token };

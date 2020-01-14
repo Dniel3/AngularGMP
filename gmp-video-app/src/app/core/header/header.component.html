@@ -3,7 +3,7 @@
   <div *ngIf="userService.isAuth$ | async" class="user-login-container">
     <div class="login-container">
       <img src="assets/ic-user.svg" class="ic_user">
-      <span *ngIf="userService.user$ | async as user" class="user-login">
+      <span *ngIf="user$ | async as user" class="user-login">
          Welcome {{user.name.first}}
       </span>
     </div>

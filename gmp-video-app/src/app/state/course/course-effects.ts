@@ -85,8 +85,7 @@ export class CourseEffects {
   readonly user$: Observable<Action> = createEffect(() => 
     this.actions$.pipe(
         ofType(user),
-        switchMap(action => localStorage.getItem('user') ?
-              observableOf(JSON.parse(localStorage.getItem('user'))) :
+        switchMap(action => 
               this.http.post<User>(`${COURSES_SERVER}/auth/userinfo`, {token: action.token})),
         map(user => {
           localStorage.setItem('user', JSON.stringify(user));

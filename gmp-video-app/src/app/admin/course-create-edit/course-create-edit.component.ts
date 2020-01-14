@@ -77,7 +77,7 @@ export class CourseCreateEditComponent {
       isTopRated: isEditing ? this.course.isTopRated : false,
     };
 
-    isEditing ? this.store.dispatch(update) : this.store.dispatch(create);
+    isEditing ? this.store.dispatch(update({course: this.course})) : this.store.dispatch(create({course: this.course}));
 
     this.router.navigate(['courses']);
   }
