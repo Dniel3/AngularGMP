@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, act } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of as observableOf, observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -60,11 +60,11 @@ export class CourseEffects {
   readonly removeCourse$: Observable<Action> = createEffect(() => 
       this.actions$.pipe(
       ofType(remove),
-      switchMap(action => this.http.delete<Course>(`${this.coursesUrl}/${action.id}`)),
-      map(() => list({
+      switchMap(action => this.http.delete<Course>(`${this.coursesUrl}/${action.id}`).pipe(map(Response => action))),
+      map((action) => list({
           'start': 0,
           'count': 5,
-          'textFragment': '',
+          'textFragment': action.textFragment || '',
       }))
   ));
 

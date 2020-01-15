@@ -50,7 +50,7 @@ export class CourseListComponent {
 
   remove(id: number) {
     if (window.confirm("Do you really want to delete this course?")) {
-      this.store.dispatch(remove({id}));
+      this.store.dispatch(remove({id, textFragment: this.newSearch$.value.textFragement}));
     }
   }
 

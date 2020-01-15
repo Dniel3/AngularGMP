@@ -21,4 +21,4 @@ export const update = createAction('[Course] Update',
 
 /** Action to delete a course. */
 export const remove = createAction('[Course] Remove',
-    props<{id:number}>());
+    props<{id: number, textFragment: string}>());
