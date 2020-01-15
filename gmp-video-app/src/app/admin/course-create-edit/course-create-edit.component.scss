@@ -38,7 +38,7 @@
       }
 
       .hint {
-        color: #6c7283;
+        color:red;
         height: 18px;
         letter-spacing: 0.19px;
         line-height: 1.5;
@@ -107,4 +107,8 @@
       width: 100%;
     }
   }
+}
+
+.error {
+  border: solid 1px  red !important;
 }

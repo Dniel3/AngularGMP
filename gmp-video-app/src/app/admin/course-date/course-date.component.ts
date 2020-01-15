@@ -14,6 +14,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class CourseDateComponent implements ControlValueAccessor {
+  @Input()
+  hasError = false;
+
   creationDate: string|undefined;
   disabled = false;
 
@@ -23,11 +26,15 @@ export class CourseDateComponent implements ControlValueAccessor {
     this.onChange(date);
   }
 
+  get value() {
+    return this.creationDate;
+  }
+
   onChange = (_: string) => {};
   onTouch = (_: string) => {};
 
   writeValue(obj: string): void {
-    this.creationDate = obj;
+    this.value = obj;
   }
 
   registerOnChange(fn: any): void {

@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'gmp-section',
@@ -7,15 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./section.component.scss']
 })
 export class SectionComponent {
-  course = '';
+  searchForm = new FormGroup({
+    textFragment: new FormControl(),
+  });
 
   @Output() search = new EventEmitter<string>();
 
-  constructor(private readonly router: Router) { }
-
-  searchCourse() {
-    console.log(this.course);
-    this.search.emit(this.course);
+  constructor(private readonly router: Router) {
+    this.searchForm.controls['textFragment'].valueChanges.subscribe(this.search);
   }
 
   add() {

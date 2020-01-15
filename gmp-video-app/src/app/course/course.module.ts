@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CourseListItemComponent } from './course-list-item/course-list-item.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CoursePageComponent } from './course-page/course-page.component';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { SectionComponent } from './section/section.component';
 import { NewReleaseDirective } from './course-list/new-release.directive';
 import { DurationPipe } from './course-list-item/duration.pipe';
@@ -28,6 +28,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     RouterModule,
   ],

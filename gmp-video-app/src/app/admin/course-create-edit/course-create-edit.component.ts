@@ -22,7 +22,7 @@ export class CourseCreateEditComponent {
   form = new FormGroup({
     title: new FormControl('', [Validators.maxLength(50), Validators.required]),
     description: new FormControl('', [Validators.maxLength(500), Validators.required]),
-    date: new FormControl('', [Validators.pattern('([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$'), Validators.required]),
+    date: new FormControl('', [Validators.pattern('^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|([0-9])|((1)[0-2]))(\\/)\\d{4}$'), Validators.required]),
     duration: new FormControl(0, [Validators.required]),
     author: new FormControl([], [Validators.required, Validators.minLength(1)])
   });
@@ -41,7 +41,7 @@ export class CourseCreateEditComponent {
         if (this.course) {
           this.form.controls['title'].setValue(this.course.name);
           this.form.controls['description'].setValue(this.course.description);
-          this.form.controls['date'].setValue(this.course.date);
+          this.form.controls['date'].setValue(new Date(this.course.date).toLocaleDateString());
           this.form.controls['duration'].setValue(this.course.length); 
           this.form.controls['author'].setValue(this.course.authors);
         }
@@ -67,5 +67,10 @@ export class CourseCreateEditComponent {
     isEditing ? this.courseService.update(this.course).subscribe(console.log) : this.courseService.create(this.course).subscribe(console.log);
 
     this.router.navigate(['courses']);
+  }
+
+  hasError(name: string): boolean {
+    const control = this.form.controls[name];
+    return control.touched && control.invalid;
   }
 }

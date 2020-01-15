@@ -3,27 +3,27 @@
     <div class="course-box">
       <h1>{{course ? course.name : 'New Course'}}</h1>
       <div class="text-row">
-        <span class="text">Title:</span><span class="hint">*required</span>
+        <span class="text">Title:</span><span *ngIf="hasError('title')" class="hint">*required</span>
       </div>
-      <input formControlName="title" type="text" id="new-course-title" placeholder="Enter course title">
+      <input [class.error]="hasError('title')" formControlName="title" type="text" id="new-course-title" placeholder="Enter course title">
       <div class="text-row">
-        <span class="text">Description:</span><span class="hint">*required</span>
+        <span class="text">Description:</span><span *ngIf="hasError('description')" class="hint">*required</span>
       </div>
-      <textarea formControlName="description" type="text" id="new-course-description" placeholder="Add description"></textarea>
+      <textarea [class.error]="hasError('description')" formControlName="description" type="text" id="new-course-description" placeholder="Add description"></textarea>
       <div class="text-row new-course-duration">
-        <span class="text">Duration:</span><span class="hint">*required</span>
+        <span class="text">Duration:</span><span *ngIf="hasError('duration')" class="hint">*required</span>
       </div>
       <div class="duration-row">
-        <gmp-course-duration formControlName="duration"></gmp-course-duration>
+        <gmp-course-duration [hasError]="hasError('duration')" formControlName="duration"></gmp-course-duration>
       </div>
       <div class=" new-course-date text-row">
-        <span class="text">Date:</span><span class="hint">*required</span>
+        <span class="text">Date:</span><span *ngIf="hasError('date')" class="hint">*required</span>
       </div>
-      <gmp-course-date formControlName="date"></gmp-course-date>
+        <gmp-course-date [hasError]="hasError('date')" formControlName="date"></gmp-course-date>
       <div class="text-row new-course-authors">
-        <span class="text">Authors:</span><span class="hint">*required</span>
+        <span class="text">Authors:</span><span *ngIf="hasError('author')" class="hint">*required</span>
       </div>
-      <gmp-course-author formControlName="author" [options]="authors$ | async"></gmp-course-author>
+      <gmp-course-author [hasError]="hasError('author')" formControlName="author" [options]="authors$ | async"></gmp-course-author>
       <div class="actions">
         <button (click)="cancel()" class="cancel">Cancel</button>
         <button (click)="save()" [disabled]="form.invalid" class="save">Save</button>

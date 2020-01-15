@@ -26,6 +26,9 @@ export class CourseAuthorComponent implements ControlValueAccessor {
   @Input()
   options: Author[] = [];
 
+  @Input()
+  hasError = false;
+
   @ViewChild('authorInput', {static: false}) authorInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
 

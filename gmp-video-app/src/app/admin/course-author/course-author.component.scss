@@ -4,6 +4,11 @@ input {
   height: 36px;
   width: 100%;
 }
+
 mat-form-field {
   width: 100%;
+}
+
+.error {
+  border: solid 1px  red !important;
 }

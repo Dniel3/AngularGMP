@@ -1,2 +1,2 @@
-<input [disabled]="disabled" [(ngModel)]="value" type="number" placeholder="minutes">
+<input [class.error]='hasError' [disabled]="disabled" [(ngModel)]="value" type="number" placeholder="minutes">
 <span *ngIf="duration">{{duration | durationFormat}}</span>

@@ -1,8 +1,8 @@
   <div class="search-action">
-    <div class="search-bar">
+    <div [formGroup]="searchForm" class="search-bar">
       <label>
         <img src="assets/ic-search.svg" class="ic_search">
-        <input [(ngModel)]="course" (keyup)='searchCourse()' type="text" class="input-with-icon" 
+        <input formControlName="textFragment" type="text" class="input-with-icon" 
             id="form-name" placeholder="Text to search">
       </label>
     </div>

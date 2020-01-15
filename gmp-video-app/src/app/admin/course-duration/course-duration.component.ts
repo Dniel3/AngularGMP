@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class CourseDurationComponent implements ControlValueAccessor {
+  @Input()
+  hasError = false;
+  
   duration: number|undefined;
   disabled = false;
   
@@ -26,8 +29,13 @@ export class CourseDurationComponent implements ControlValueAccessor {
     this.onTouch(minutes);
   }
 
+  get value(): number {
+    return this.duration;
+  }
+
   writeValue(obj: number): void {
     this.duration = obj;
+    this.value = this.duration;
   }
 
   registerOnChange(fn: any): void {
