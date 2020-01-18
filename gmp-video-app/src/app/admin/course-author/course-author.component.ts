@@ -37,6 +37,7 @@ export class CourseAuthorComponent implements ControlValueAccessor {
 
   constructor() {
     this.filteredAuthors$ = this.authInput.valueChanges.pipe(
+      //Filter by string since author is emited when added.
       filter(author => typeof author === 'string'), 
         map((author: string) => this._filter(author)));
   }
@@ -55,6 +56,7 @@ export class CourseAuthorComponent implements ControlValueAccessor {
     this.authors.push(event.option.value)
     this.onChange(this.authors);
     this.onTouch(this.authors);
+    //clear searched input value.
     this.authorInput.nativeElement.value = '';
     this.authInput.setValue(null);
   }

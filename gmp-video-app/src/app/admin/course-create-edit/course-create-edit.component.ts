@@ -69,8 +69,8 @@ export class CourseCreateEditComponent {
     this.router.navigate(['courses']);
   }
 
-  hasError(name: string): boolean {
+  hasError(name: string, error = 'required'): boolean {
     const control = this.form.controls[name];
-    return control.touched && control.invalid;
+    return control.touched && control.hasError(error);
   }
 }

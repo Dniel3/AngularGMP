@@ -4,10 +4,12 @@
       <h1>{{course ? course.name : 'New Course'}}</h1>
       <div class="text-row">
         <span class="text">Title:</span><span *ngIf="hasError('title')" class="hint">*required</span>
+        <span *ngIf="hasError('title', 'maxlength')" class="hint">*Length must be at most 50 characteres</span>
       </div>
       <input [class.error]="hasError('title')" formControlName="title" type="text" id="new-course-title" placeholder="Enter course title">
       <div class="text-row">
         <span class="text">Description:</span><span *ngIf="hasError('description')" class="hint">*required</span>
+        <span *ngIf="hasError('description', 'maxlength')" class="hint">*Length must be at most 500 characteres</span>
       </div>
       <textarea [class.error]="hasError('description')" formControlName="description" type="text" id="new-course-description" placeholder="Add description"></textarea>
       <div class="text-row new-course-duration">
@@ -18,6 +20,7 @@
       </div>
       <div class=" new-course-date text-row">
         <span class="text">Date:</span><span *ngIf="hasError('date')" class="hint">*required</span>
+        <span *ngIf="hasError('date', 'pattern')" class="hint">*Invalid date format dd/mm/yyyy</span>
       </div>
         <gmp-course-date [hasError]="hasError('date')" formControlName="date"></gmp-course-date>
       <div class="text-row new-course-authors">
