@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { OverlayModule } from '@angular/cdk/overlay'
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -19,13 +20,13 @@ import { OverlayModule } from '@angular/cdk/overlay'
     LogoComponent,
     NotFoundPageComponent,
     LoadingSpinnerComponent,
-
   ],
   imports: [
     CommonModule, 
     RouterModule,
     MatProgressSpinnerModule,
     OverlayModule,
+    TranslateModule,
   ],
   exports: [HeaderComponent, FooterComponent, BreadcrumComponent, LoadingSpinnerComponent],
 })

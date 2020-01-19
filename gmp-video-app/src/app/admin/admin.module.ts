@@ -10,6 +10,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatChipsModule,
     MatSelectModule,
     MatIconModule,
+    TranslateModule,
   ],
   exports: [CourseCreateEditComponent],
   entryComponents: [CourseAuthorComponent]

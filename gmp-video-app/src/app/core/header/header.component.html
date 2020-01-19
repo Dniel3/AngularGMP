@@ -3,13 +3,13 @@
   <div *ngIf="userService.isAuth$ | async" class="user-login-container">
     <div class="login-container">
       <img src="assets/ic-user.svg" class="ic_user">
-      <span *ngIf="userService.user$ | async as user" class="user-login">
-         Welcome {{user.name.first}}
+      <span *ngIf="(userService.user$ | async) as user" class="user-login">
+         {{'HEADER.WELCOME' | translate:user.name}}
       </span>
     </div>
     <div (click)="logOut()" id='log-out-container'>
       <img src="assets/ic-exit.svg" class="ic_exit">
-      <span class="log-off"> Log off</span>
+      <span class="log-off"> {{'HEADER.LOGOFF' | translate}}</span>
     </div>
   </div>
 </div>

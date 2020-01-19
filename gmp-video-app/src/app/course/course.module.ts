@@ -11,6 +11,7 @@ import { DurationPipe } from './course-list-item/duration.pipe';
 import { OrderByPipe } from './course-list/order-by.pipe';
 import { FilterCoursePipe } from './course-list/filter-course.pipe';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -31,6 +32,7 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     MatCardModule,
     RouterModule,
+    TranslateModule,
   ],
   exports: [
     CoursePageComponent,

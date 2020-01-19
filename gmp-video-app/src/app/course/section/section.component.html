@@ -2,11 +2,11 @@
     <div [formGroup]="searchForm" class="search-bar">
       <label>
         <img src="assets/ic-search.svg" class="ic_search">
-        <input formControlName="textFragment" type="text" class="input-with-icon" 
-            id="form-name" placeholder="Text to search">
+        <input formControlName="textFragment" type="text" class="input-with-icon" id="form-name"
+          placeholder="{{'SECTION.INPUT' | translate}}">
       </label>
     </div>
   </div>
   <div class="add-action">
-    <div><button (click)="add()"><i class="fas fa-plus"></i><span>Add course</span></button></div>
+    <div><button (click)="add()"><i class="fas fa-plus"></i><span>{{'SECTION.ADD' | translate}}</span></button></div>
   </div>

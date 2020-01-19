@@ -1,1 +1,11 @@
-<span>Copyright © Videocourses. All rights reserved</span>
+<span>{{'FOOTER.COPYRIGHT' | translate}}d</span>
+<span>
+  {{'FOOTER.SELECT' | translate}}
+  <select #langSelect (change)="translate.use(langSelect.value)">
+    <option *ngFor="let lang of translate.getLangs()" 
+        [value]="lang" 
+        [selected]="lang === translate.currentLang">
+      {{ lang }}
+    </option>
+  </select>
+</span>

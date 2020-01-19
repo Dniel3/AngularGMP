@@ -1,5 +1,10 @@
   $silver: #c0c3ce;
 
+  :host {
+    display: flex;
+    flex-direction: column;
+  }
+
   span {
     color: $silver;
     font-family: SourceSansPro;

@@ -1,35 +1,44 @@
 <div class="course-container">
   <form [formGroup]="form">
     <div class="course-box">
-      <h1>{{course ? course.name : 'New Course'}}</h1>
+      <h1>{{course ? course.name : 'ADMINCOURSE.TITLE' | translate}}</h1>
       <div class="text-row">
-        <span class="text">Title:</span><span *ngIf="hasError('title')" class="hint">*required</span>
-        <span *ngIf="hasError('title', 'maxlength')" class="hint">*Length must be at most 50 characteres</span>
+        <span class="text">{{'ADMINCOURSE.TITLE_FIELD' | translate}}:</span>
+        <span *ngIf="hasError('title')" class="hint">*{{'ADMINCOURSE.REQUIRED' | translate}}</span>
+        <span *ngIf="hasError('title', 'maxlength')" class="hint">*{{'ADMINCOURSE.TITLE_LENGTH' | translate}}</span>
       </div>
-      <input [class.error]="hasError('title')" formControlName="title" type="text" id="new-course-title" placeholder="Enter course title">
+      <input [class.error]="hasError('title')" formControlName="title" type="text" id="new-course-title"
+        placeholder="{{'ADMINCOURSE.TITLE_PLACEHOLDER' | translate}}">
       <div class="text-row">
-        <span class="text">Description:</span><span *ngIf="hasError('description')" class="hint">*required</span>
-        <span *ngIf="hasError('description', 'maxlength')" class="hint">*Length must be at most 500 characteres</span>
+        <span class="text">{{'ADMINCOURSE.DESCRIPTION' | translate}}:</span>
+        <span *ngIf="hasError('description')" class="hint">*{{'ADMINCOURSE.REQUIRED' | translate}}</span>
+        <span *ngIf="hasError('description', 'maxlength')"
+          class="hint">*{{'ADMINCOURSE.DESCRIPTION_LENGTH' | translate}}</span>
       </div>
-      <textarea [class.error]="hasError('description')" formControlName="description" type="text" id="new-course-description" placeholder="Add description"></textarea>
+      <textarea [class.error]="hasError('description')" formControlName="description" type="text"
+        id="new-course-description" placeholder="{{'ADMINCOURSE.DESCRIPTION_PLACEHOLDER' | translate}}"></textarea>
       <div class="text-row new-course-duration">
-        <span class="text">Duration:</span><span *ngIf="hasError('duration')" class="hint">*required</span>
+        <span class="text">{{'ADMINCOURSE.DURATION' | translate}}:</span><span *ngIf="hasError('duration')"
+          class="hint">*{{'ADMINCOURSE.REQUIRED' | translate}}</span>
       </div>
       <div class="duration-row">
         <gmp-course-duration [hasError]="hasError('duration')" formControlName="duration"></gmp-course-duration>
       </div>
       <div class=" new-course-date text-row">
-        <span class="text">Date:</span><span *ngIf="hasError('date')" class="hint">*required</span>
-        <span *ngIf="hasError('date', 'pattern')" class="hint">*Invalid date format dd/mm/yyyy</span>
+        <span class="text">{{'ADMINCOURSE.DATE' | translate}}:</span>
+        <span *ngIf="hasError('date')" class="hint">*{{'ADMINCOURSE.REQUIRED' | translate}}</span>
+        <span *ngIf="hasError('date', 'pattern')" class="hint">*{{'ADMINCOURSE.DATE_FORMAT' | translate}}</span>
       </div>
-        <gmp-course-date [hasError]="hasError('date')" formControlName="date"></gmp-course-date>
+      <gmp-course-date [hasError]="hasError('date')" formControlName="date"></gmp-course-date>
       <div class="text-row new-course-authors">
-        <span class="text">Authors:</span><span *ngIf="hasError('author')" class="hint">*required</span>
+        <span class="text">{{'ADMINCOURSE.AUTHORS' | translate}}:</span>
+        <span *ngIf="hasError('author')" class="hint">*{{'ADMINCOURSE.REQUIRED' | translate}}</span>
       </div>
-      <gmp-course-author [hasError]="hasError('author')" formControlName="author" [options]="authors$ | async"></gmp-course-author>
+      <gmp-course-author [hasError]="hasError('author')" formControlName="author" [options]="authors$ | async">
+      </gmp-course-author>
       <div class="actions">
-        <button (click)="cancel()" class="cancel">Cancel</button>
-        <button (click)="save()" [disabled]="form.invalid" class="save">Save</button>
+        <button (click)="cancel()" class="cancel">{{'ADMINCOURSE.CANCEL' | translate}}</button>
+        <button (click)="save()" [disabled]="form.invalid" class="save">{{'ADMINCOURSE.SAVE' | translate}}</button>
       </div>
     </div>
   </form>

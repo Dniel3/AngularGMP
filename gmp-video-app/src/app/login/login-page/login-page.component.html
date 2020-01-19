@@ -1,12 +1,12 @@
 <div class="login-container">
   <div [formGroup]="loginForm" class="login-box">
-    <h1>Login</h1>
-    <div class="text-row"><span class="text">E-mail</span><span *ngIf="loginForm.controls['email'].hasError('required')" class="hint">*required</span></div>
+    <h1>{{'LOGIN.TITLE' | translate}}</h1>
+    <div class="text-row"><span class="text">{{'LOGIN.EMAIL' | translate}}</span><span *ngIf="loginForm.controls['email'].hasError('required')" class="hint">{{'LOGIN.REQUIRED' | translate}}</span></div>
     <input formControlName="email" type="text" id="login-email" placeholder="Enter e-mail">
-    <div class="text-row"><span class="text">Password</span><span *ngIf="loginForm.controls['password'].hasError('required')" class="hint">*required</span></div>
+    <div class="text-row"><span class="text">{{'LOGIN.PASSWORD' | translate}}</span><span *ngIf="loginForm.controls['password'].hasError('required')" class="hint">{{'LOGIN.REQUIRED' | translate}}</span></div>
     <input formControlName="password" type="text" id="login-pass" placeholder="Enter password">
     <div class="actions">
-      <a>Forgot Password?</a><button [disabled]="false&&loginForm.invalid" (click)="login()">Login</button>
+      <a>{{'LOGIN.FORGOT' | translate}}</a><button [disabled]="false&&loginForm.invalid" (click)="login()">{{'LOGIN.TITLE' | translate}}</button>
     </div>
   </div>
 </div>

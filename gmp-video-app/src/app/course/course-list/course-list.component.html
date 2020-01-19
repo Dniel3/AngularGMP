@@ -1,13 +1,13 @@
 <ng-container *ngIf="courses$ | async as courses">
   <ng-container *ngIf="courses.length">
-    <gmp-course-list-item *ngFor="let course of courses | orderBy" [course]="course"
-        [gmpNewRelease]="course.date" (remove)="remove($event)" (edit)="edit($event)">
+    <gmp-course-list-item *ngFor="let course of courses | orderBy" [course]="course" [gmpNewRelease]="course.date"
+      (remove)="remove($event)" (edit)="edit($event)">
     </gmp-course-list-item>
   </ng-container>
   <div *ngIf="!courses.length" id="empty-courses">
-    <span>NO DATA. FEEL FREE TO ADD NEW COURSE</span>
+    <span>{{'COURSELIST.NO_DATE' | translate}}</span>
   </div>
   <div *ngIf="courses.length" id='load-more' (click)="loadMore()">
-    <span>LOAD MORE</span>
+    <span>{{'COURSELIST.LOAD_MORE' | translate}}</span>
   </div>
 </ng-container>

@@ -1,0 +1,51 @@
+{
+  "HEADER": {
+    "WELCOME": "Bienvenido {{first}}",
+    "LOGOFF": "Salir"
+  },
+  "FOOTER": {
+    "SELECT": "Lenguaje",
+    "COPYRIGHT": "Copyright © Videocourses. Todos los derechos reservados"
+  },
+  "LOGIN": {
+    "TITLE": "Acceder",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Contraseña",
+    "FORGOT": "¿Olvidaste tu contraseña?",
+    "REQUIRED": "*Requerido"
+  },
+  "NOTFOUND": {
+    "TITLE": "Pagina no encontrada"
+  },
+  "ADMINCOURSE": {
+    "TITLE": "Nuevo Curso",
+    "TITLE_FIELD": "Título",
+    "TITLE_LENGTH": "Longitud maxima de 50 caracteres",
+    "TITLE_PLACEHOLDER": "Ingrese el título del curso",
+    "DESCRIPTION": "Descripción",
+    "DESCRIPTION_LENGTH": "Longitud maxima de 500 caracteres",
+    "DESCRIPTION_PLACEHOLDER": "Agregar descripción",
+    "DURATION": "Duración",
+    "DATE": "Fecha",
+    "REQUIRED": "Requerido",
+    "DATE_FORMAT": "Formato invalido dd/mm/aaaa",
+    "AUTHORS": "Autores",
+    "CANCEL": "Cancelar",
+    "SAVE": "Guardar"
+  },
+  "COURSEDATE": {
+    "PLACEHOLDER": "Fecha de creación"
+  },
+  "SECTION": {
+    "INPUT": "Texto a buscar",
+    "ADD": "Agregar curso"
+  },
+  "COURSEITEM": {
+    "EDIT": "editar",
+    "DELETE": "borrar"
+  },
+  "COURSELIST": {
+    "NO_DATE": "NO HAY CURSOS. AGREGA UNO NUEVO",
+    "LOAD_MORE": "CARGAR MÁS"
+  }
+}

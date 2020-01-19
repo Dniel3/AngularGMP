@@ -5,7 +5,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        if(!req.url.includes('login')) {
+        if(!req.url.includes('login') && !req.url.includes('i18n')) {
             req = req.clone({
                 headers: new HttpHeaders({
                     ['Authorization']: localStorage.getItem('token'),

@@ -1,0 +1,51 @@
+{
+  "HEADER": {
+    "WELCOME": "Welcome {{first}}",
+    "LOGOFF": "Log off"
+  },
+  "FOOTER": {
+    "SELECT": "Language",
+    "COPYRIGHT": "Copyright © Videocourses. All rights reserved"
+  },
+  "LOGIN": {
+    "TITLE": "Login",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Password",
+    "FORGOT": "Forgot password?",
+    "REQUIRED": "*Required"
+  },
+  "NOTFOUND": {
+    "TITLE": "Page not found"
+  },
+  "ADMINCOURSE": {
+    "TITLE": "New course",
+    "TITLE_FIELD": "Title",
+    "TITLE_LENGTH": "Length must be at most 50 characteres",
+    "TITLE_PLACEHOLDER": "Enter course title",
+    "DESCRIPTION": "Description",
+    "DESCRIPTION_LENGTH": "Length must be at most 500 characteres",
+    "DESCRIPTION_PLACEHOLDER": "Add description",
+    "DURATION": "Duration",
+    "DATE": "Date",
+    "REQUIRED": "Required",
+    "DATE_FORMAT": "Invalid date format dd / mm / yyyy",
+    "AUTHORS": "Authors",
+    "CANCEL": "Cancel",
+    "SAVE": "Save"
+  },
+  "COURSEDATE": {
+    "PLACEHOLDER": "Enter creation date"
+  },
+  "SECTION": {
+    "INPUT": "Text to search",
+    "ADD": "Add course"
+  },
+  "COURSEITEM": {
+    "EDIT": "edit",
+    "DELETE": "delete"
+  },
+  "COURSELIST": {
+    "NO_DATE": "NO DATA. FEEL FREE TO ADD NEW COURSE",
+    "LOAD_MORE": "LOAD MORE"
+  }
+}
